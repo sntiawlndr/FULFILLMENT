@@ -28,6 +28,13 @@
                                 <a href="index2.html"> Analytics </a>
                             </li>
                         </ul>
+
+                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
+                                <a href="index.html"> dannusm </a>
+                            </li>
+                        </ul>
+
                     </li>
 
                     <li class="menu md-visible menu-heading">
