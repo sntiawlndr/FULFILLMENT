@@ -6,7 +6,7 @@
                                 <div class="widget-header">                                
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h4>Product
+                                            <h4>Product kartika
                                             <a href="{{url('/product')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                                             </h4>
                                         </div>                                                                        
