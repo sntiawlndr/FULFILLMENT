@@ -28,3 +28,7 @@ Route::get('/product/get/{id}','ProductController@product_get');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
