@@ -9,7 +9,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{ asset('plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/dashboard/dash_1.css')}}" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/select2/select2.min.css')}}">
 
     <!-- BEGIN PAGE LEVEL STYLES -->
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/datatables.css')}}">
