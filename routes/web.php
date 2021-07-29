@@ -46,12 +46,14 @@ Route::post('/barang/datatable','BarangController@barang_datatable');
 Route::get('/barang/get/{id}','BarangController@barang_get');
 Route::get('/barang/print/{id}','BarangController@barang_print');
 Route::post('/upload/proses', 'BarangController@import_data');
+
 //Terima Barang Baru
 Route::get('/baru','TerimabarangbaruController@baru_show');
 Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
 Route::post('/baru/datatable','TerimabarangbaruController@baru_datatable');
 Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
 Route::post('/tbb/datatable','TerimabarangbaruController@tbb_datatable');
+
 //Terima Barang Lama
 Route::get('/lama','TerimabaranglamaController@lama_show');
 Route::post('/lama/datatable','TerimabaranglamaController@lama_datatable');
@@ -60,6 +62,8 @@ Route::post('/tbl/datatable','TerimabaranglamaController@tbl_datatable');
 
 //Keluar Barang
 
+
+//User
 Route::get('/user/add','FmUserController@index');
 Route::post('/user/save','FmUserController@user_save');
 Route::get('/user','FmUserController@user_show');
