@@ -47,6 +47,31 @@ Route::get('/barang/get/{id}','BarangController@barang_get');
 Route::get('/barang/print/{id}','BarangController@barang_print');
 Route::post('/upload/proses', 'BarangController@import_data');
 
+
+
+// Seller
+Route::get('/home','HomeController@index');
+Route::get('/seller/add','SellerController@index');
+Route::post('/seller/save','SellerController@seller_save');
+Route::get('/seller','SellerController@seller_show');
+Route::get('/seller/edit/{id}','SellerController@seller_edit');
+Route::get('/seller/delete/{id}','SellerController@seller_delete');
+Route::post('/seller/update','SellerController@seller_update');
+Route::post('/seller/datatable','SellerController@seller_datatable');
+Route::get('/seller/get/{id}','SellerController@seller_get');
+
+// Seller Invoice
+Route::get('/home','HomeController@index');
+Route::get('/invoice/add','InvoiceController@index');
+Route::post('/invoice/save','InvoiceController@invoice_save');
+Route::get('/invoice','InvoiceController@invoice_show');
+Route::get('/invoice/edit/{id}','InvoiceController@invoice_edit');
+Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
+Route::post('/invoice/update','InvoiceController@invoice_update');
+Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
+Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
+
+
 //Terima Barang Baru
 Route::get('/baru','TerimabarangbaruController@baru_show');
 Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
@@ -58,12 +83,15 @@ Route::post('/tbb/datatable','TerimabarangbaruController@tbb_datatable');
 Route::get('/lama','TerimabaranglamaController@lama_show');
 Route::post('/lama/datatable','TerimabaranglamaController@lama_datatable');
 Route::get('/tbl/show','TerimabaranglamaController@tbl_show');
+
 Route::post('/tbl/datatable','TerimabaranglamaController@tbl_datatable');
 
 //Keluar Barang
 
 
+
 //User
+
 Route::get('/user/add','FmUserController@index');
 Route::post('/user/save','FmUserController@user_save');
 Route::get('/user','FmUserController@user_show');
