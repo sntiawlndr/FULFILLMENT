@@ -1,6 +1,9 @@
 @extends('layout.app')
 @section('content')
+<<<<<<< HEAD
+=======
 <br>
+>>>>>>> fc9c6b9ca64e23cc162101618f212e3d065687a8
 <div id="tableStriped" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
@@ -141,56 +144,59 @@
         });
     }
 
-// function delete_id(id){
-//     var ask = ("Are Sure?");
-//     if(ask){
+
+function delete_id(id){
+    var ask = ("Are Sure?");
+    if(ask){
     
   
-//      $.ajax({
-//                 url:"{{url('/barang/delete')}}/"+id,
-//                 method: 'GET',
-//                 cache: false,
-//                 contentType: false,
-//                 processData: false,
-//                 success: function(response) {
-//                     alert("Hapus Data berhasil");
-//                     load_data();
-//                 },error: function (error) {
-//                      alert("Hapus Data Gagal");          
-//                 }
-//            });
-//     }
-// }
+     $.ajax({
+                url:"{{url('/barang/delete')}}/"+id,
+                method: 'GET',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert("Hapus Data berhasil");
+                    load_data();
+                },error: function (error) {
+                     alert("Hapus Data Gagal");          
+                }
+           });
+    }
+}
 
-// function detail_id(id){
+function detail_id(id){
       
-//      $.ajax({
-//                 url:"{{url('/barang/get')}}/"+id,
-//                 method: 'GET',
-//                 cache: false,
-//                 contentType: false,
-//                 processData: false,
-//                 success: function(response) {
-//                     var data = JSON.parse(response);
-//                     var body ="";
-//                     if(data.content.length > 0){
-//                        $('#detailmodal').modal('show');
-//                        val = data.content[0];
-//                        $(".list-detail").html(" ");
-//                        body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
-// body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
-// body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
-// body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
-// body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
-//     $(".list-detail").html(body);
-//                     }else{
-//                         alert("Barang Detail Tidak Ditemukan") ;
-//                     }
-//                 },error: function (error) {
-//                         alert("Terjadi Kesalahan") ;       
-//                 }
-//            });
+     $.ajax({
+                url:"{{url('/barang/get')}}/"+id,
+                method: 'GET',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    var body ="";
+                    if(data.content.length > 0){
+                       $('#detailmodal').modal('show');
+                       val = data.content[0];
+                       $(".list-detail").html(" ");
+                       body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
+body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
+body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
+body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
+body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
+    $(".list-detail").html(body);
+                    }else{
+                        alert("Barang Detail Tidak Ditemukan") ;
+                    }
+                },error: function (error) {
+                        alert("Terjadi Kesalahan") ;       
+                }
+           });
 
-// }
+}
+
+
 </script>
 @endpush
