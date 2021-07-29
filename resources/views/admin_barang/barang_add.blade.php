@@ -19,7 +19,23 @@
             <div class="form-group row mb-4">
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Seller</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select id="seller_id" class="form-control" name="seller_id">
+                    <select class="form-control select2" name="seller_id">
+                        {{-- data jamak dijadikan satu  --}}
+                        @foreach ($sellers as $seller)
+
+                        <option value="{{$seller->seller_id}}">{{$seller->seller_name}}</option>
+
+
+                        @endforeach
+                    </select>
+
+                    @csrf
+                </div>
+            </div>
+            <div class="form-group row mb-4">
+                <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
+                <div class="col-xl-10 col-lg-9 col-sm-10">
+                    <select class="form-control select2" name="seller_id">
                         {{-- data jamak dijadikan satu  --}}
                         @foreach ($sellers as $seller)
 
@@ -100,7 +116,7 @@
 @endsection('content')
 @push('jsfooter')
 <script type="text/javascript">
-    var ss = $("#seller_id").select2({
+    var ss = $(".select2").select2({
         tags: true,
     });
 

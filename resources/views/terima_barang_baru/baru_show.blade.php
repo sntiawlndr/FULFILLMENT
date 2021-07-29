@@ -117,10 +117,9 @@
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/tbb/show/"+data['in'];
-    
-    return '<a href="'+urledit+'" class="btn btn-primary"/>Terima Barang</a> '
-    +'<a href="javascript:void(0)" class="btn btn-success" onclick="print_id('+data['inventory_id']+')">Print</a> ';  
+       
+    return '<a href="{{url('/tbb/show')}}" class="btn btn-primary"/>Terima Barang</a> '
+    +'<a href="javascript:void(0)" class="btn btn-success" onclick="print_id('+data['inventory_id']+')">Print UID</a> ';  
            } },         
             ],
 
