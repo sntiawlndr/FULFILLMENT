@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Seller;
+use App\Role;
 use DB;
 
 class SellerController extends Controller
 {
     function index(){
-        
-        return view('seller.seller_add');
+        $data = Role::get_data_id_all();
+        return view('seller.seller_add')->with('roles',$data);;
+        // $data = Seller::get_data_id_all();
+        // return view('admin_barang.barang_add')->with('sellers',$data);
     }
 
 
@@ -39,6 +42,8 @@ class SellerController extends Controller
      $length = $_POST['length'];
      $start = $_POST['start'];
      $search = $_POST['search']['value'];
+     $join = "(SELECT address_city FROM fm_address WHERE address_id = fm_address.address_id) as address_name, ";
+     $join .= "(SELECT group_name FROM fm_group_role WHERE group_role_id = fm_group_role.group_role_id) as group_name "; 
 
     
     if($search){   

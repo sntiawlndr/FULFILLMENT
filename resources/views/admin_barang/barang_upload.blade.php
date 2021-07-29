@@ -1,5 +1,9 @@
 @extends('layout.app')
 @section('content')
+<<<<<<< HEAD
+=======
+<br>
+>>>>>>> fc9c6b9ca64e23cc162101618f212e3d065687a8
 <div id="tableStriped" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
@@ -140,6 +144,7 @@
         });
     }
 
+
 function delete_id(id){
     var ask = ("Are Sure?");
     if(ask){
@@ -191,5 +196,7 @@ body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";
            });
 
 }
+
+
 </script>
 @endpush

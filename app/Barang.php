@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-// test
+
 use Illuminate\Database\Eloquent\Model;
 use DB;
 

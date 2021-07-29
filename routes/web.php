@@ -35,6 +35,7 @@ Route::get('/barang/get/{id}','BarangController@barang_get');
 Route::get('/barang/print/{id}','BarangController@barang_print');
 Route::post('/upload/proses', 'BarangController@import_data');
 
+
 // Seller
 Route::get('/home','HomeController@index');
 Route::get('/seller/add','SellerController@index');
@@ -45,6 +46,26 @@ Route::get('/seller/delete/{id}','SellerController@seller_delete');
 Route::post('/seller/update','SellerController@seller_update');
 Route::post('/seller/datatable','SellerController@seller_datatable');
 Route::get('/seller/get/{id}','SellerController@seller_get');
+
+// Seller Invoice
+Route::get('/home','HomeController@index');
+Route::get('/invoice/add','InvoiceController@index');
+Route::post('/invoice/save','InvoiceController@invoice_save');
+Route::get('/invoice','InvoiceController@invoice_show');
+Route::get('/invoice/edit/{id}','InvoiceController@invoice_edit');
+Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
+Route::post('/invoice/update','InvoiceController@invoice_update');
+Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
+Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
+
+//Terima Barang Baru
+Route::get('/baru','TerimabarangbaruController@baru_show');
+Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
+Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
+//Terima Barang Lama
+Route::get('/lama','TerimabaranglamaController@lama_show');
+Route::get('/tbl/show','TerimabaranglamaController@tbl_show');
+
 
 
 

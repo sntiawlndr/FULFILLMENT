@@ -26,7 +26,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" >provinsi</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <select id="seller_id" class="form-control" name="seller_id">
+                                            <select   class="form-control select2" name="seller_id">
                                                
                                              </select>
                                              </div>
@@ -36,45 +36,52 @@
                                             <label for="hEmail" >Nama</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                                 <input type="text" class="form-control" id="seller_name" placeholder="" name="seller_name">
+                                                @csrf
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" >Kota</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <select id="seller_id" class="form-control" name="seller_id">
+                                            <select class="form-control select2" name="seller_id">
                                                
                                              </select>
                                              </div>
                                         </div>
                                      
                                         <div class="form-group col-md-6">
-                                            <label for="hEmail" >Nama</label>
+                                            <label for="hEmail" >No. HP</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                                 <input type="text" class="form-control" id="seller_name" placeholder="" name="seller_name">
                                             </div>
                                         </div>
 
                                         <div class="form-group col-md-6">
-                                            <label for="hEmail" >No HP</label>
+                                            <label for="hEmail" >Kecamatan</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <select id="seller_id" class="form-control" name="seller_id">
+                                            <select  class="form-control select2" name="seller_id">
                                                
                                              </select>
                                              </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="hEmail" >No HP</label>
+                                            <label for="hEmail" >Role</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <select id="seller_id" class="form-control" name="seller_id">
-                                               
+                                            <select  class="form-control select2" name="role_id">
+                                            {{-- data jamak dijadikan satu  --}}
+                                                @foreach ($roles as $role)
+
+                                                <option value="{{$role->group_role_id}}">{{$role->group_name}}</option>
+
+
+                                                @endforeach
                                              </select>
                                              </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="hEmail" >No HP</label>
+                                            <label for="hEmail" >Kode Pos</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <select id="seller_id" class="form-control" name="seller_id">
+                                            <select  class="form-control select2" name="seller_id">
                                                
                                              </select>
                                              </div>
@@ -82,8 +89,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Status</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-
-                                                <select id="product_status" class="form-control" name="product_status">
+                                             <select class="selectpicker form-control" id="product_status" class="form-control" name="product_status">
 
                                                     <option if="" ($status="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Enable</option>
 
@@ -94,7 +100,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="hEmail" >Nama</label>
+                                            <label for="hEmail" >Alamat</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                         <textarea class="form-control" name="product_name" id="product_name"></textarea>
                                         </div>
@@ -105,6 +111,7 @@
                                                 <a href="javascript:void" class="btn btn-primary" id="saveButton" >Save</a>
                                             </div>
                                         </div>
+                                        
                                    
                                 </div>
                             </div>
@@ -113,7 +120,7 @@
 
     @push('jsfooter')
     <script type="text/javascript">
-    var ss = $("#seller_id").select2({
+    var ss = $(".select2").select2({
         tags: true,
     });
 
