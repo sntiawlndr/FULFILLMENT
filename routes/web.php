@@ -88,6 +88,8 @@ Route::post('/tbl/datatable','TerimabaranglamaController@tbl_datatable');
 
 //Keluar Barang
 
+//Role
+
 
 
 //User
