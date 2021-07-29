@@ -15,6 +15,7 @@ class ProductController extends Controller
 
 
     public function product_save(Request $request){
+        
 
         $add = New ProductModel;
         $add->product_name = $request->get('product_name'); 
