@@ -32,8 +32,16 @@ Route::get('/barang/delete/{id}','BarangController@barang_delete');
 Route::post('/barang/update','BarangController@barang_update');
 Route::post('/barang/datatable','BarangController@barang_datatable');
 Route::get('/barang/get/{id}','BarangController@barang_get');
-Route::get('/upload', 'UploadController@upload');
-Route::post('/upload/proses', 'UploadController@proses_upload');
+Route::get('/barang/print/{id}','BarangController@barang_print');
+Route::post('/upload/proses', 'BarangController@import_data');
+//Terima Barang Baru
+Route::get('/baru','TerimabarangbaruController@baru_show');
+Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
+Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
+//Terima Barang Lama
+Route::get('/lama','TerimabaranglamaController@lama_show');
+Route::get('/tbl/show','TerimabaranglamaController@tbl_show');
+//Keluar Barang
 
 
 

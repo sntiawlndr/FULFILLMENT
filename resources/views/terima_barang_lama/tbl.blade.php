@@ -5,56 +5,29 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Daftar Barang</h4>
+                                         <h4>Terima Barang Lama</h4>
                                         </div>                 
                                     </div>
                                 </div>
-                                
-        
-                                <div class="col-lg-12 layout-spacing">
-                                    <div class="statbox widget box box-shadow">
-                                        <div class="widget-header">
-                                            <div class="row">
-                                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                    <h4></h4>
-                                                </div>
-                                            </div>
+                                <form>
+                                <div class="widget-content widget-content-area">                                   
+                                    <div class="form-group row mb-4">
+                                        <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
+                                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                                            <textarea class="form-control" name="no_invoice" autocomplete="off" readonly="" 
+                                                id="no_invoice">{{$data['baru']->no_invoice}}</textarea>
                                         </div>
-                                    <label>Seller</label>            
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-primary">
-                                        <option>Semua(Select2)</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                        <option>Onions</option>
-                                    </select>
-                                    
-                                    <label>Ukuran</label>
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
-                                        <option>Semua</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                    </select>         
+                                    </div>
+                                    @csrf                                                                           
                                 
-                                <span style="float:right;"><a href="{{url('/barang/filter')}}" class="btn btn-primary" style="margin-top:-10%;">Filter</a> </span>                                
-                                </form>
-                                <br>
-                                <span style="float:right;"><a href="{{url('/barang/upload')}}" class="btn btn-primary" style="margin-top:-10%;">Import CSV</a> </span>
-                                <span style="float:right;"><a href="{{url('/barang/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
-                                <br>
                                 <br>
                                 <div class="widget-content widget-content-area">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Seller</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>SKU</th>
-                                                    <th>Ukuran</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>UID</th>
+                                                    <th>Name</th>                                                 
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -142,23 +115,17 @@
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "product_id"},
+{data : "inventory_id"},
+{data : "uid"},
 {data : "seller_name"},
-{data : "product_name"},
-{data : "product_sku"},
-{data : "size"},
+
+// { data: null, render: function ( data, type, row ) {
 
 
-{ data: null, render: function ( data, type, row ) {
-
-
-    let urledit = "{{URL::to('/')}}/barang/edit/"+data['product_id'];
+//     let urledit = "{{URL::to('/')}}/baru/"+data['product_id'];
     
-    return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
-    +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['product_id']+")' class='btn btn-danger'>Delete</a>"
-    +'<a href="javascript:void(0)" class="btn btn-success" onclick="print_id('+data['product_id']+')">Print</a> ';    
-           } },         
+//     return '<a href="'+urledit+'" class="btn btn-primary"/Batal</a> ';       
+//            } },         
             ],
 
             "oLanguage": {

@@ -5,44 +5,11 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Daftar Barang</h4>
+                                         <h4>Daftar Terima Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
-                                
-        
-                                <div class="col-lg-12 layout-spacing">
-                                    <div class="statbox widget box box-shadow">
-                                        <div class="widget-header">
-                                            <div class="row">
-                                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                    <h4></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <label>Seller</label>            
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-primary">
-                                        <option>Semua(Select2)</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                        <option>Onions</option>
-                                    </select>
-                                    
-                                    <label>Ukuran</label>
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
-                                        <option>Semua</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                    </select>         
-                                
-                                <span style="float:right;"><a href="{{url('/barang/filter')}}" class="btn btn-primary" style="margin-top:-10%;">Filter</a> </span>                                
-                                </form>
-                                <br>
-                                <span style="float:right;"><a href="{{url('/barang/upload')}}" class="btn btn-primary" style="margin-top:-10%;">Import CSV</a> </span>
-                                <span style="float:right;"><a href="{{url('/barang/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
-                                <br>
+                             
                                 <br>
                                 <div class="widget-content widget-content-area">
                                     <div class="table-responsive">
@@ -50,10 +17,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
+                                                    <th>No Invoice</th>
                                                     <th>Seller</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>SKU</th>
-                                                    <th>Ukuran</th>
+                                                    <th>Total Jumlah</th>
+                                                    <th>Asal</th>
                                                     <th class="text-center" width="35%">Action</th>
                                                 </tr>
                                             </thead>
@@ -72,7 +39,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Barang Detail</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Terima Barang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -137,27 +104,24 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/barang/datatable')}}",
+            "url": "{{url('/lama/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "product_id"},
+{data : "inventory_id"},
+{data : "no_invoice"},
 {data : "seller_name"},
-{data : "product_name"},
-{data : "product_sku"},
-{data : "size"},
+{data : "amount"},
+{data : "asal"},
 
 
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/barang/edit/"+data['product_id'];
+    let urledit = "{{URL::to('/')}}/tbl/"+data['in'];
     
-    return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
-    +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['product_id']+")' class='btn btn-danger'>Delete</a>"
-    +'<a href="javascript:void(0)" class="btn btn-success" onclick="print_id('+data['product_id']+')">Print</a> ';    
+    return '<a href="'+urledit+'" class="btn btn-primary"/>Terima Barang</a> ';   
            } },         
             ],
 

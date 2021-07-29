@@ -17,3 +17,12 @@
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/table/datatable/custom_dt_multiple_tables.css')}}">
 <!-- END PAGE LEVEL STYLES -->
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <!--  BEGIN CUSTOM STYLE FILE SELECT  -->
+    <link href="{{asset('assets/css/scrollspyNav.css" rel="stylesheet')}}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-select/bootstrap-select.min.css')}}">
+    <!--  END CUSTOM STYLE FILE  -->
+
+    <!-- BEGIN PAGE LEVEL STYLES FILE UPLOAD -->
+    <link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('plugins/file-upload/file-upload-with-preview.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES FILE UPLOAD-->
