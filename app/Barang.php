@@ -27,6 +27,11 @@ class Barang extends Model
         $data = DB::table("fm_product")->where('product_id',$id)->get();
         return $data;
     }
+    
+    static function barang_print_by_id($id){
+        $data = DB::table("fm_product")->where('product_id',$id)->get();
+        return $data;
+    }
 
     static function barang_delete($id){
     

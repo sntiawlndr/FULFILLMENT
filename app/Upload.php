@@ -13,7 +13,7 @@ class Upload extends Model
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+    public function import_data(array $row)
     {
         return new Upload([
             'product_id' => $row[1],

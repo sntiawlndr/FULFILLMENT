@@ -1,5 +1,6 @@
 @extends('layout.app')
 @section('content')
+<br>
 <div id="tableStriped" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
@@ -14,17 +15,24 @@
                                 <br>
                                 <form action="{{url('/upload/proses')}}" method="POST" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                 
-                                    <div class="form-group">
-                                        <b>File Gambar</b><br/>
-                                        <input type="file" name="file">
-                                    </div>                
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>                                  
+                                    </div>  
+                                    
+                                    {{-- <div class="form-group">                                    
+                                        <input type="file" class="custom-file-input"  name="file">
+                                        <input type="submit" value="Upload" class="btn btn-primary">
+                                    </div>                 --}}                                
                                 
-                 
-                                    <input type="submit" value="Upload" class="btn btn-primary">
                                 </form>
-                                 
-                                                                     
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">                                     
+                                        <a href="{{url('/barang/cek')}}" class="btn btn-primary" style="float:right;margin-top: -1%;color:#fff;">Cek</a>                                           
+                                    </div> 
+                                </div>
+                                          
                                
                                 <br>
                                 <div class="widget-content widget-content-area">
@@ -133,56 +141,56 @@
         });
     }
 
-function delete_id(id){
-    var ask = ("Are Sure?");
-    if(ask){
+// function delete_id(id){
+//     var ask = ("Are Sure?");
+//     if(ask){
     
   
-     $.ajax({
-                url:"{{url('/barang/delete')}}/"+id,
-                method: 'GET',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert("Hapus Data berhasil");
-                    load_data();
-                },error: function (error) {
-                     alert("Hapus Data Gagal");          
-                }
-           });
-    }
-}
+//      $.ajax({
+//                 url:"{{url('/barang/delete')}}/"+id,
+//                 method: 'GET',
+//                 cache: false,
+//                 contentType: false,
+//                 processData: false,
+//                 success: function(response) {
+//                     alert("Hapus Data berhasil");
+//                     load_data();
+//                 },error: function (error) {
+//                      alert("Hapus Data Gagal");          
+//                 }
+//            });
+//     }
+// }
 
-function detail_id(id){
+// function detail_id(id){
       
-     $.ajax({
-                url:"{{url('/barang/get')}}/"+id,
-                method: 'GET',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    var body ="";
-                    if(data.content.length > 0){
-                       $('#detailmodal').modal('show');
-                       val = data.content[0];
-                       $(".list-detail").html(" ");
-                       body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
-body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
-body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
-body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
-body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
-    $(".list-detail").html(body);
-                    }else{
-                        alert("Barang Detail Tidak Ditemukan") ;
-                    }
-                },error: function (error) {
-                        alert("Terjadi Kesalahan") ;       
-                }
-           });
+//      $.ajax({
+//                 url:"{{url('/barang/get')}}/"+id,
+//                 method: 'GET',
+//                 cache: false,
+//                 contentType: false,
+//                 processData: false,
+//                 success: function(response) {
+//                     var data = JSON.parse(response);
+//                     var body ="";
+//                     if(data.content.length > 0){
+//                        $('#detailmodal').modal('show');
+//                        val = data.content[0];
+//                        $(".list-detail").html(" ");
+//                        body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
+// body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
+// body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
+// body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
+// body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
+//     $(".list-detail").html(body);
+//                     }else{
+//                         alert("Barang Detail Tidak Ditemukan") ;
+//                     }
+//                 },error: function (error) {
+//                         alert("Terjadi Kesalahan") ;       
+//                 }
+//            });
 
-}
+// }
 </script>
 @endpush
