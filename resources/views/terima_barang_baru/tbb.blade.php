@@ -14,8 +14,14 @@
                                     <div class="form-group row mb-4">
                                         <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
                                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class="form-control" name="no_invoice" autocomplete="off" readonly="" 
-                                                id="no_invoice">{{$data['baru']->no_invoice}}</textarea>
+                                            <textarea class = "form" name="no_invoice" autocomplete="off" readonly="" 
+                                                id="no_invoice"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="hScan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Scan Barcode UID</label>
+                                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                                            <textarea class = "form" name="scan" autocomplete="off"></textarea>
                                         </div>
                                     </div>
                                     @csrf                                                                           
@@ -111,7 +117,7 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/barang/datatable')}}",
+            "url": "{{url('/tbb/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
@@ -123,9 +129,8 @@
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/baru/"+data['product_id'];
     
-    return '<a href="'+urledit+'" class="btn btn-primary"/Batal</a> ';       
+    return '<a href="{{url('\barang')}}" class="btn btn-primary"/Batal</a> ';       
            } },         
             ],
 

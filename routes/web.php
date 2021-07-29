@@ -22,6 +22,18 @@ Route::get('/product/delete/{id}','ProductController@product_delete');
 Route::post('/product/update','ProductController@product_update');
 Route::post('/product/datatable','ProductController@product_datatable');
 Route::get('/product/get/{id}','ProductController@product_get');
+
+//Category
+
+Route::get('/category/add','CategoryController@index');
+Route::post('/category/save','CategoryController@category_save');
+Route::get('/category','CategoryController@category_show');
+Route::get('/category/edit/{id}','CategoryController@category_edit');
+Route::get('/category/delete/{id}','CategoryController@category_delete');
+Route::post('/category/update','CategoryController@category_update');
+Route::post('/category/datatable','CategoryController@category_datatable');
+Route::get('/category/get/{id}','CategoryController@category_get');
+
 //Barang
 Route::get('/barang/upload','BarangController@upload_show');
 Route::get('/barang/add','BarangController@index');
@@ -60,12 +72,24 @@ Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
 
 //Terima Barang Baru
 Route::get('/baru','TerimabarangbaruController@baru_show');
-Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
 Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
+Route::post('/baru/datatable','TerimabarangbaruController@baru_datatable');
+Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
+Route::post('/tbb/datatable','TerimabarangbaruController@tbb_datatable');
 //Terima Barang Lama
 Route::get('/lama','TerimabaranglamaController@lama_show');
+Route::post('/lama/datatable','TerimabaranglamaController@lama_datatable');
 Route::get('/tbl/show','TerimabaranglamaController@tbl_show');
 
+Route::post('/tbl/datatable','TerimabaranglamaController@tbl_datatable');
+
+//Keluar Barang
+
+
+Route::get('/user/add','FmUserController@index');
+Route::post('/user/save','FmUserController@user_save');
+Route::get('/user','FmUserController@user_show');
+Route::post('/user/datatable','FmUserController@user_datatable');
 
 
 

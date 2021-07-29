@@ -17,7 +17,7 @@ class Terimabarangbaru extends Model
         return $data;
 
     }
-    static function tbb_data_id_(){
+    static function tbb_data_id(){
         $data = DB::table('inventory_data')->get();
         return $data;
 

@@ -14,9 +14,10 @@
                                     <div class="form-group row mb-4">
                                         <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
                                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class="form-control" name="no_invoice" autocomplete="off" readonly="" 
-                                                id="no_invoice">{{$data['baru']->no_invoice}}</textarea>
-                                        </div>
+                                            <textarea class="form" name="no_invoice" autocomplete="off" readonly="" 
+                                                id="no_invoice"></textarea>
+                                                {{-- {{$data['baru']->no_invoice}} --}}
+                                            </div>
                                     </div>
                                     @csrf                                                                           
                                 
@@ -110,7 +111,7 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/barang/datatable')}}",
+            "url": "{{url('/tbl/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },

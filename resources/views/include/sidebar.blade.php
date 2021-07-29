@@ -23,12 +23,15 @@
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
                                 <a href="{{url('/category')}}">Daftar Kategori</a>
-                            </li>
-                            <li> 
+                            </li>                            
+                        </ul>
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
                                 <a href="{{url('/barang')}}">Daftar Barang</a>
                             </li>
                         </ul>
                         
+
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu active">
                         <a href="#dashboard" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
@@ -50,14 +53,26 @@
                         </ul>
 
 
-                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="{{url('/tbb')}}">Terima Barang Baru</a>
+                                <a href="{{url('/baru')}}">Daftar Barang Baru</a>
                             </li>
                         </ul>
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="{{url('/tbl')}}">Terima Barang Lama </a>
+                                <a href="{{url('/baru')}}">Daftar Barang Lama</a>
+                            </li>
+                        </ul>
+
+
+                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
+                                <a href="{{url('/tbb/show')}}">Terima Barang Baru</a>
+                            </li>
+                        </ul>
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
+                                <a href="{{url('/tbl/show')}}">Terima Barang Lama </a>
                             </li>
                         </ul>
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
