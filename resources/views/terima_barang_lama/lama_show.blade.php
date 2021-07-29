@@ -119,9 +119,9 @@
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/tbl/"+data['in'];
+    // let urledit = "{{URL::to('/')}}/tbl/show"+data['in'];
     
-    return '<a href="'+urledit+'" class="btn btn-primary"/>Terima Barang</a> ';   
+    return '<a href="{{url('/tbl/show')}}" class="btn btn-primary"/>Terima Barangs</a> ';   
            } },         
             ],
 

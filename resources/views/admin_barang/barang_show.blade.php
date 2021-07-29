@@ -51,6 +51,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Seller</th>
+                                                    <th>Kategori</th>
                                                     <th>Nama Barang</th>
                                                     <th>SKU</th>
                                                     <th>Ukuran</th>
@@ -143,6 +144,7 @@
         },
          "columns":[
 {data : "product_id"},
+{data : "seller_name"},
 {data : "seller_name"},
 {data : "product_name"},
 {data : "product_sku"},
