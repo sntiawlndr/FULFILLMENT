@@ -145,7 +145,7 @@
          "columns":[
 {data : "product_id"},
 {data : "seller_name"},
-{data : "seller_name"},
+{data : "category_name"},
 {data : "product_name"},
 {data : "product_sku"},
 {data : "size"},
@@ -203,7 +203,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/barang/print')}}/"+id,
+                url:"{{url('/barang/get')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
