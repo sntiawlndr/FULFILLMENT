@@ -70,6 +70,7 @@ Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
 Route::post('/invoice/update','InvoiceController@invoice_update');
 Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
 Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
+Route::get('/invoice/detail','InvoiceController@invoice_detail');
 
 
 //Terima Barang Baru

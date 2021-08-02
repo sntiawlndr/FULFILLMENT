@@ -89,7 +89,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Status</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                             <select class="selectpicker form-control" id="product_status" class="form-control" name="product_status">
+                                             <select class="selectpicker form-control" id="seller_status" class="form-control" name="seller_status">
 
                                                     <option if="" ($status="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Enable</option>
 
@@ -130,6 +130,7 @@
         'seller_email':$("#seller_email").val(),
         'seller_telpon':$("#seller_telpon").val(),
         'seller_name':$("#seller_name").val(),
+        'seller_status':$("#seller_status").val(),
         '_token':$("input[name='_token']").val()
     }
 

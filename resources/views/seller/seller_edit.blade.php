@@ -18,6 +18,7 @@
                                             <label for="e_mail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">E-mail</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                                 <input type="email" class="form-control" id="seller_email" placeholder="" name="seller_email"  value="{{$seller->seller_email}}" required>
+                                                <input type="hidden" class="form-control" id="seller_id" placeholder=""  value="{{$seller->seller_id}}">
                                                 @csrf
                                             </div>
                                         </div>
@@ -54,6 +55,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         @endsection('content')
 
     @push('jsfooter')

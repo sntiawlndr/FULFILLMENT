@@ -23,8 +23,8 @@
                                 
                                     <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
                                         <option>Show All</option>
-                                        <option>Sudah Lunas</option>
-                                        <option>Belum Lunas</option>
+                                        <option>Enable Only</option>
+                                        <option>Disabled</option>
                                     </select>  
                                                                     
                                 </form>
@@ -118,7 +118,8 @@
     
     return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['seller_id']+')">Detail</a> '
     +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['seller_id']+")' class='btn btn-danger'>Delete</a>";    
+    +"<a href='javascript:void(0)' onclick='delete_id("+data['seller_id']+")' class='btn btn-danger'>Delete</a>"
+    +'<a href="'+urledit+'" class="btn btn-success"/>Ganti Password</a> ';    
            } },         
             ],
 

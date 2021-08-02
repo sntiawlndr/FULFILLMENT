@@ -47,8 +47,10 @@
                             <li class="active">
                                 <a href="{{url('/seller')}}">Daftar Seller</a>
                             </li>
-                            <li> 
-                                <a href="{{url('/barang')}}">Seller Invoice</a>
+                        </ul>
+                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
+                            <li class="active">
+                                <a href="{{url('/invoice')}}">Seller Invoice</a>
                             </li>
                         </ul>
 
