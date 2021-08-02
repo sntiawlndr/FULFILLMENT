@@ -37,6 +37,7 @@
         var secondUpload = new FileUploadWithPreview('mySecondImage')
     </script>
     <!-- END PAGE LEVEL PLUGINS FILE UPLOAD -->    
+    
 
     <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
     <script>

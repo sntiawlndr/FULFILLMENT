@@ -1,6 +1,6 @@
 @extends('layout.app')
 @section('content')
-    
+
 <br>
 <div id="flHorizontalForm" class="col-lg-12 layout-spacing">
     <div class="statbox widget box box-shadow">
@@ -8,8 +8,7 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4>Edit Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark"
-                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                        <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                 </div>
             </div>
@@ -31,23 +30,20 @@
                         </select>
 
                         {{-- <input type="text" class="form-control" id="seller_id" placeholder="" name="seller_id" value="{{$barang->seller_id}}"> --}}
-                        <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder=""
-                            value="{{$data['barang']->product_id}}">
+                        <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder="" value="{{$data['barang']->product_id}}">
                         @csrf
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="hPassword" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Barang</label>
                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                        <textarea class="form-control" name="product_name"
-                            id="product_name">{{$data['barang']->product_name}}</textarea>
+                        <textarea class="form-control" name="product_name" id="product_name">{{$data['barang']->product_name}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
                     <label for="hPassword" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">SKU</label>
                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                        <textarea class="form-control" name="product_sku"
-                            id="product_sku">{{$data['barang']->product_sku}}</textarea>
+                        <textarea class="form-control" name="product_sku" id="product_sku">{{$data['barang']->product_sku}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row mb-4">
@@ -96,12 +92,12 @@
 
 @push('jsfooter')
 <script type="text/javascript">
-var ss = $("#seller_id").select2({
+    var ss = $("#seller_id").select2({
         tags: true
     });
 
-    $(".size").each(function () {
-        if ($(this).val() == "{{$data['barang']->size}}"){
+    $(".size").each(function() {
+        if ($(this).val() == "{{$data['barang']->size}}") {
             $(this).attr("checked", "true");
 
         }
@@ -109,7 +105,7 @@ var ss = $("#seller_id").select2({
     $("#product_status").val("{{$data['barang']->product_status}}");
 
 
-    $("#saveButton").click(function () {
+    $("#saveButton").click(function() {
 
         formData = {
             'product_id': $("#product_id").val(),
@@ -127,7 +123,7 @@ var ss = $("#seller_id").select2({
             method: 'POST',
             data: formData,
             cache: false,
-            success: function (response) {
+            success: function(response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -136,7 +132,7 @@ var ss = $("#seller_id").select2({
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 alert("Terjadi Kesalahan");
             }
         });
