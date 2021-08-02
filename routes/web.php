@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// test
 //Product
 Route::get('/home', 'HomeController@index');
 Route::get('/product/add', 'ProductController@index');
@@ -83,15 +84,17 @@ Route::post('/seller/datatable', 'SellerController@seller_datatable');
 Route::get('/seller/get/{id}', 'SellerController@seller_get');
 
 // Seller Invoice
-Route::get('/home', 'HomeController@index');
-Route::get('/invoice/add', 'InvoiceController@index');
-Route::post('/invoice/save', 'InvoiceController@invoice_save');
-Route::get('/invoice', 'InvoiceController@invoice_show');
-Route::get('/invoice/edit/{id}', 'InvoiceController@invoice_edit');
-Route::get('/invoice/delete/{id}', 'InvoiceController@invoice_delete');
-Route::post('/invoice/update', 'InvoiceController@invoice_update');
-Route::post('/invoice/datatable', 'InvoiceController@invoice_datatable');
-Route::get('/invoice/get/{id}', 'InvoiceController@invoice_get');
+
+Route::get('/home','HomeController@index');
+Route::get('/invoice/add','InvoiceController@index');
+Route::post('/invoice/save','InvoiceController@invoice_save');
+Route::get('/invoice','InvoiceController@invoice_show');
+Route::get('/invoice/edit/{id}','InvoiceController@invoice_edit');
+Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
+Route::post('/invoice/update','InvoiceController@invoice_update');
+Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
+Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
+Route::get('/invoice/detail','InvoiceController@invoice_detail');
 
 
 //Terima Barang Baru

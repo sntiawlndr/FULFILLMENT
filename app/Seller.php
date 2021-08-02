@@ -8,7 +8,7 @@ class Seller extends Model
 {
     protected $table = "fm_seller";
     protected $primaryKey='seller_id';
-    protected $fillable = ['seller_email','seller_name','seller_telpon','group_role','address_id'];
+    protected $fillable = ['seller_email','seller_name','seller_telpon','group_role','address_id','seller_status'];
 
 
 

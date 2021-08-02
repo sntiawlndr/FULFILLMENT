@@ -72,6 +72,7 @@ class SellerController extends Controller
 
     public function seller_edit($seller_id){
         $data = Seller::seller_get_by_id($seller_id);
+
         return view('seller.seller_edit')->with('seller',$data[0]);
     }
 
