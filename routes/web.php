@@ -111,7 +111,14 @@ Route::post('/tbl/datatable', 'TerimabaranglamaController@tbl_datatable');
 //Keluar Barang
 
 //Role
-
+Route::get('/grole/add', 'GroleController@index');
+Route::post('/grole/save', 'GroleController@grole_save');
+Route::get('/grole', 'GroleController@grole_show');
+Route::get('/grole/edit/{id}', 'GroleController@grole_edit');
+Route::get('/grole/delete/{id}', 'GroleController@grole_delete');
+Route::post('/grole/update', 'GroleController@grole_update');
+Route::post('/grole/datatable', 'GroleController@grole_datatable');
+Route::get('/grole/get/{id}', 'GroleController@grole_get');
 
 
 //User
@@ -122,7 +129,7 @@ Route::get('/user', 'FmUserController@user_show');
 Route::post('/user/datatable', 'FmUserController@user_datatable');
 
 
-
+//Login
 
 
 
