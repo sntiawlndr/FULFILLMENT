@@ -14,17 +14,18 @@
                                 </div>
                                 <div class="widget-content widget-content-area">
                                     <form>
-                                    <div class="form-row mb-4">
+                                        <div class="form-row mb-4">
                                             <div class="form-group col-md-6">
-                                            <label for="e_mail" >Nama Role</label>
-                                            <div class="col-xl-10 col-lg-9 col-sm-10">
+                                                <label for="hEmail" class="col-xl-6 col-sm-6 col-form-label">Nama Role</label>
+                                                <div class="col-xl-10 col-lg-9 col-sm-10">
                                                 <input type="text" class="form-control" id="group_name" placeholder="" name="group_name" required>
                                                 @csrf
                                             </div>
                                         </div>
+                                    </div>
                                        
 
-
+                                    <div class="form-row mb-4">
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Status</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -38,6 +39,7 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
                                       </form> 
                                         <div class="form-group row">
                                             <div class="col-sm-10">

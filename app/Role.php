@@ -30,4 +30,5 @@ class Role extends Model
         $delete = DB::DELETE("DELETE FROM fm_group_role WHERE group_role_id ='".$id."' ");
         return $delete;
     }
+    
 }

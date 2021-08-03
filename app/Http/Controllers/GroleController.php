@@ -97,6 +97,29 @@ class GroleController extends Controller
         return redirect('/grole');
     }
 
+    public function grole_suspend($id){
+        $add = Role::where('group_role_id',$id)->firstOrFail();
+        $add->group_status = 'disable';
+        $result = $add->save();
+
+         if($result){
+             return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$result, 'success'=>TRUE));
+        }else{
+             return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>$result, 'success'=>FALSE));
+        } 
+    }
+    public function grole_unsuspend($id){
+        $add = Role::where('group_role_id',$id)->firstOrFail();
+        $add->group_status = 'enable';
+        $result = $add->save();
+
+         if($result){
+             return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$result, 'success'=>TRUE));
+        }else{
+             return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>$result, 'success'=>FALSE));
+        } 
+    }
+
 
     public function grole_get($id){
 
