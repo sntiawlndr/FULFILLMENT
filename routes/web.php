@@ -85,7 +85,7 @@ Route::get('/seller/get/{id}', 'SellerController@seller_get');
 
 // Seller Invoice
 
-Route::get('/home','HomeController@index');
+
 Route::get('/invoice/add','InvoiceController@index');
 Route::post('/invoice/save','InvoiceController@invoice_save');
 Route::get('/invoice','InvoiceController@invoice_show');
