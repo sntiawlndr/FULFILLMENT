@@ -71,7 +71,7 @@ class GroleController extends Controller
         $roles = Role::get_data_id_all();
         $data = Role::role_get_by_id($group_role_id);
         
-        return view('group_role.grole_edit')->with('grole',$data[0])->with('roles',$categories);
+        return view('group_role.grole_edit')->with('grole',$data[0])->with('roles',$roles);
     }
 
      public function grole_update(Request $request){

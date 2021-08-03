@@ -1,5 +1,9 @@
 @extends('layout.app')
 @section('content')
+@php
+ echo $data;
+ exit;   
+@endphp
 <div id="tableCheckbox" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
