@@ -7,7 +7,7 @@
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                          <h4>Role 
                                             <span style="float:right;"><a href="{{url('/grole/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span></h4>
-                                            <button class="btn btn-default" data-toggle="modal" data-target="#tambah" ><i class="fa fa-plus"></i> tambah</button>
+                                            
                                         </div>                 
                                     </div>
                                 </div>
@@ -17,7 +17,8 @@
                                             <thead>
                                                 <tr>
                                                     
-                                                    <th>No</th>
+                                                    
+                                                    <th>No </th>
                                                     <th>Nama Role</th>
                                                     <th>Status</th>
                                                     
@@ -25,6 +26,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
 
                                                
                                                 
@@ -63,20 +65,63 @@
 </div>
 
         <!-- modal -->
+        <div class="modal fade" id="ajaxModel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modelHeading"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formData" name="formData" class="form-horizontal">
+                           <input type="hidden" name="Customer_id" id="Customer_id">
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" value="" maxlength="50" required="">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Status</label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                 <select class="selectpicker form-control" id="group_status" class="form-control" name="group_status">
+        
+                                        <option if="" ($status="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Enable</option>
+        
+                                        <option if="" ($status="=" 2="" )="" echo="" 'selected'="" ;="" ?="">Disable</option>
+        
+        
+                                    </select>
+                                </div>
+                            </div>
+        
+                            
+        
+                            <div class="col-sm-offset-2 col-sm-10">
+                             <button type="submit" class="btn btn-primary" id="saveBtn" value="create">Save changes
+                             </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+                             
+
+        
 
         {{-- modal Tambah --}}
-        <div class="modal fade" id="tambah">
+        {{-- <div class="modal fade" id="tambah" >
             <div class="modal-dialog">
               <div class="modal-content">
                  <form enctype="multipart/form-data" action="proses_tambah_poliklinik.php" method="POST">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Tambah Poliklinik</h4>
+                  <h4 class="modal-title">Tambah Role</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group col-md-6">
-                        <label for="e_mail" >Nama Role</label>
+                        <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Nama</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <input type="text" class="form-control" id="group_name" placeholder="" name="group_name" required>
                             @csrf
@@ -106,9 +151,9 @@
               </div>
             </div>
         </div>
-        
+         --}}
        
-        {{-- modal Tambah --}}
+        {{-- modal --}}
 
 @endsection('content');
 @push('jsfooter')
@@ -123,13 +168,18 @@
         $('#zero-config').DataTable( {
          "processing": true,
         "serverSide": true,
+        
         "ajax": {
             "url": "{{url('/grole/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
-         "columns":[
-{data : "group_role_id"},           
+         "columns":[ { "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
+                 
 {data : "group_name"},
 {data : "group_status"},
 
@@ -139,10 +189,16 @@
 
     let urledit = "{{URL::to('/')}}/grole/edit/"+data['group_role_id'];
     
-    return '<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +'<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['group_role_id']+')">Detail</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['group_role_id']+")' class='btn btn-danger'>Delete</a>";
-            
+     var btn =  '<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> ';
+    btn = btn +'<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['group_role_id']+')">Detail</a> ';
+    if (data['group_status']=='disable'){
+        btn= btn+"<a href='javascript:void(0)' onclick='unsuspend_id("+data['group_role_id']+")' class='btn btn-danger'>Unsuspend</a>";
+    }else{
+        btn = btn+ "<a href='javascript:void(0)' onclick='suspend_id("+data['group_role_id']+")' class='btn btn-danger'>Suspend</a>";
+    }
+   
+    btn=btn +"<a href='javascript:void(0)' onclick='delete_id("+data['group_role_id']+")' class='btn btn-danger'>Delete</a>";
+       return btn;     
            } },         
             ],
 
@@ -163,7 +219,7 @@
     }
 
 function delete_id(id){
-    var ask = ("Are Sure?");
+    var ask = confirm("Apakah Anda Yakin?");
     if(ask){
     
   
@@ -182,6 +238,48 @@ function delete_id(id){
            });
     }
 }
+function suspend_id(id){
+    var ask = confirm("Suspend ?");
+    if(ask){
+    
+  
+     $.ajax({
+                url:"{{url('/grole/suspend')}}/"+id,
+                method: 'GET',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert("Suspend Data berhasil");
+                    load_data();
+                },error: function (error) {
+                     alert("Suspend Data Gagal");          
+                }
+           });
+    }
+}
+function unsuspend_id(id){
+    var ask = confirm("Unsuspend ?");
+    if(ask){
+    
+  
+     $.ajax({
+                url:"{{url('/grole/unsuspend')}}/"+id,
+                method: 'GET',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert("Unsuspend Data berhasil");
+                    load_data();
+                },error: function (error) {
+                     alert("unsuspend Data Gagal");          
+                }
+           });
+    }
+}
+
+
 
 function detail_id(id){
       
@@ -210,6 +308,41 @@ body += "<tr><td>group Status : <td><td>"+val.group_status+"<td></tr>";
                         alert("Terjadi Kesalahan") ;       
                 }
            });
+//tambahan untuk modal Creat
+        $('#createNewCustomer').click(function () {
+        $('#saveBtn').val("create-Customer");
+        
+        $("#group_name").val(),
+        $("#group_status").val(),
+        $('#formData').trigger("reset");
+        $('#modelHeading').html("Create New Customer");
+        $('#ajaxModel').modal('show');
+    });
+
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+
+        $.ajax({
+          data: $('#formData').serialize(),
+          url: "{{url('/grole/save')}}",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+
+              $('#formData').trigger("reset");
+              $('#ajaxModel').modal('hide');
+              table.draw();
+
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+
+           
 
 }
 </script>

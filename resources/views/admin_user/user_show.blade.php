@@ -15,6 +15,7 @@
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Email</th>
                                                     <th>No. HP</th>
                                                     <th>Nama</th>
@@ -80,7 +81,11 @@
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
-         "columns":[
+         "columns":[ { "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
 // {data : "user_id"},
 {data : "email"},
 {data : "user_telepon"},
@@ -153,9 +158,10 @@ function detail_id(id){
                        val = data.content[0];
                        $(".list-detail").html(" ");
                        body += "<tr><td>ID : <td><td>"+val.user_id+"<td></tr>";
-body += "<tr><td>Nama Kategori : <td><td>"+val.user_name+"<td></tr>";
-body += "<tr><td>user Status : <td><td>"+val.user_status+"<td></tr>";
-    
+body += "<tr><td>Email  : <td><td>"+val.email+"<td></tr>";
+body += "<tr><td>Nama : <td><td>"+val.name+"<td></tr>";
+body += "<tr><td>NoHp : <td><td>"+val.user_telepon+"<td></tr>";
+body += "<tr><td>Group Role : <td><td>"+val.group_role+"<td></tr>";    
     $(".list-detail").html(body);
                     }else{
                         alert("user Detail Tidak Ditemukan") ;

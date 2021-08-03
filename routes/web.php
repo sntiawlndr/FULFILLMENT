@@ -122,6 +122,8 @@ Route::get('/grole/delete/{id}', 'GroleController@grole_delete');
 Route::post('/grole/update', 'GroleController@grole_update');
 Route::post('/grole/datatable', 'GroleController@grole_datatable');
 Route::get('/grole/get/{id}', 'GroleController@grole_get');
+Route::get('/grole/suspend/{id}', 'GroleController@grole_suspend');
+Route::get('/grole/unsuspend/{id}', 'GroleController@grole_unsuspend');
 
 
 //User
@@ -130,6 +132,8 @@ Route::get('/user/add', 'FmUserController@index');
 Route::post('/user/save', 'FmUserController@user_save');
 Route::get('/user', 'FmUserController@user_show');
 Route::post('/user/datatable', 'FmUserController@user_datatable');
+Route::get('/user/get/{id}', 'FmUserController@user_get');
+Route::get('/user/delete/{id}', 'FmUserController@user_delete');
 
 
 //Login
