@@ -8,37 +8,17 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4>Edit Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                        <a href="{{url('/barang')}}" class="btn btn-dark"
+                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                 </div>
             </div>
         </div>
         <div class="widget-content widget-content-area">
-            <div class="form-group row mb-4">
-
-                <label for="hSeller" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Seller</label>
-                <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select id="seller_id" class="form-control select2" name="seller_id">
-                        {{-- data jamak dijadikan satu  --}}
-                        @foreach ($data['sellers'] as $seller)
-
-                        <option value="{{$seller->seller_id}}">{{$seller->seller_name}}</option>
-
-
-                        @endforeach
-                    </select>
-
-                    {{-- <input type="text" class="form-control" id="seller_id" placeholder="" name="seller_id" value="{{$baran  g->seller_id}}">
-                    --}}
-                    {{-- <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder=""
-                        value="{{$data['barang']->product_id}}"> --}}
-                    <input type="hidden" class="form-control" name="seller_id" id="seller_id" placeholder=""
-                        value="{{$data['sellers']->seller_id}}">
-                    @csrf
-
-                </div>
-            </div>
-       
+        </div>
+    </div>
+</div>
+</div>
 <div class="form-group row mb-4">
 
     <label for="hKategori" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
@@ -51,28 +31,13 @@
 
 
             @endforeach
-        </select>     
-        <input type="hidden" class="form-control" name="category_id" id="category_id" placeholder=""
-         value="{{$data['categories']->category_id}}">
-         @csrf
+        </select>
+        <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder=""
+            value="{{$data['barang']->product_id}}">
+        @csrf
     </div>
 </div>
-<div class="form-group row mb-4">
-                <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
-                <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select class="form-control select2" name="catagory_id">
-                        {{-- data jamak dijadikan satu  --}}
-                        {{-- dibawah ini yg td diedit --}}
-                        @foreach ($data['categories'] as $category)
-                        {{-- <option value="{{$catagories->catagory_id}}">{{$catagory->catagory_name}}</option> --}}
-                        {{-- dibawah ini yg td diedit --}}
-                        <option value="{{$category->category_id}}">{{$category->category_name}}</option> 
 
-                        @endforeach
-                    </select>
-                
-                </div>
-            </div>
 <div class="form-group row mb-4">
     <label for="hPassword" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Barang</label>
     <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -132,19 +97,11 @@
 
 @push('jsfooter')
 <script type="text/javascript">
-<<<<<<< HEAD
     var ss = $(".select2").select2({
         tags: true
     });
 
     $(".size").each(function () {
-=======
-    var ss = $("#seller_id").select2({
-        tags: true
-    });
-
-    $(".size").each(function() {
->>>>>>> fc77fd5795e3c9093b80071e4da57b3ba38ad53d
         if ($(this).val() == "{{$data['barang']->size}}") {
             $(this).attr("checked", "true");
 
@@ -153,14 +110,11 @@
     $("#product_status").val("{{$data['barang']->product_status}}");
 
 
-    $("#saveButton").click(function() {
+    $("#saveButton").click(function () {
 
         formData = {
             'product_id': $("#product_id").val(),
-            'seller_id': $("#seller_id").val(),
-            'seller_name': $("#seller_name").val(),
             'category_id': $("#category_id").val(),
-            'category_name': $("#category_name").val(),
             'product_name': $("#product_name").val(),
             'product_sku': $("#product_sku").val(),
             'size': $(".size:checked").val(),
@@ -170,11 +124,11 @@
 
 
         $.ajax({
-            url: "{{url('/barang/update')}}",
+            url: "{{url('/selbrg/update')}}",
             method: 'POST',
             data: formData,
             cache: false,
-            success: function(response) {
+            success: function (response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -183,7 +137,7 @@
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function(error) {
+            error: function (error) {
                 alert("Terjadi Kesalahan");
             }
         });

@@ -7,7 +7,8 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4> Add Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                        <a href="{{url('/barang')}}" class="btn btn-dark"
+                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                     <hr>
                 </div>
@@ -15,37 +16,21 @@
         </div>
         <div class="widget-content widget-content-area">
             <br>
-            <div class="form-group row mb-4">
-                <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Seller</label>
-                <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select class="form-control select2" name="seller_id">
-                        @foreach ($data['sellers'] as $seller)    
-                        {{-- data jamak dijadikan satu  --}}
-                        {{-- dibawah ini yg td diedit --}}
-                        
-                        <option value="{{$seller->seller_id}}">{{$seller->seller_name}}</option>
-
-
-                        @endforeach
-                    </select>
-
-                    @csrf
-                </div>
-            </div>
+            
             <div class="form-group row mb-4">
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
                     <select class="form-control select2" name="catagory_id">
                         {{-- data jamak dijadikan satu  --}}
                         {{-- dibawah ini yg td diedit --}}
-                        @foreach ($data['categories'] as $category)
+                        @foreach ($categories as $category)
                         {{-- <option value="{{$catagories->catagory_id}}">{{$catagory->catagory_name}}</option> --}}
                         {{-- dibawah ini yg td diedit --}}
                         <option value="{{$category->category_id}}">{{$category->category_name}}</option> 
 
                         @endforeach
                     </select>
-                
+                    @csrf
                 </div>
             </div>
             <div class="form-group row mb-4">
@@ -120,10 +105,10 @@
         tags: true,
     });
 
-    $("#saveButton").click(function() {
+    $("#saveButton").click(function () {
 
         formData = {
-            'seller_id': $("#seller_id").val(),
+            'product_id': $("#product_id").val(),
             'category_id': $("#category_id").val(),
             'product_name': $("#product_name").val(),
             'product_sku': $("#product_sku").val(),
@@ -134,11 +119,11 @@
 
 
         $.ajax({
-            url: "{{url('/barang/save')}}",
+            url: "{{url('/selbrg/save')}}",
             method: 'POST',
             data: formData,
             cache: false,
-            success: function(response) {
+            success: function (response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -147,7 +132,7 @@
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function(error) {
+            error: function (error) {
                 alert("Terjadi Kesalahan");
             }
         });

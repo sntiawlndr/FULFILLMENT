@@ -5,7 +5,7 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Daftar Seller</h4>
+                                         <h4>Daftar Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
@@ -20,16 +20,28 @@
                                                 </div>
                                             </div>
                                         </div>
-                                
+                                    <label>Seller</label>            
+                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-primary">
+                                        <option>Semua(Select2)</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                        <option>Onions</option>
+                                    </select>
+                                    
+                                    <label>Ukuran</label>
                                     <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
-                                        <option>Show All</option>
-                                        <option>Enable Only</option>
-                                        <option>Disabled</option>
-                                    </select>  
-                                                                    
-                               
+                                        <option>Semua</option>
+                                        <option>S</option>
+                                        <option>M</option>
+                                        <option>L</option>
+                                        <option>XL</option>
+                                    </select>         
+                                
+                                <span style="float:right;"><a href="{{url('/barang/filter')}}" class="btn btn-primary" style="margin-top:-10%;">Filter</a> </span>                                
+                                </form>
                                 <br>
-                                <span style="float:right;"><a href="{{url('/seller/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
+                                <span style="float:right;"><a href="{{url('/selbrg/upload')}}" class="btn btn-primary" style="margin-top:-10%;">Import CSV</a> </span>
+                                <span style="float:right;"><a href="{{url('/selbrg/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
                                 <br>
                                 <br>
                                 <div class="widget-content widget-content-area">
@@ -38,10 +50,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>E-mail</th>
-                                                    <th>No HP</th>
-                                                    <th>Nama</th>
-                                                    <th>Group</th>
+                                                    <th>Kategori</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>SKU</th>
+                                                    <th>Ukuran</th>
                                                     <th class="text-center" width="35%">Action</th>
                                                 </tr>
                                             </thead>
@@ -60,7 +72,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Seller Detail</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Barang Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -83,13 +95,40 @@
 </div>
 
         <!-- modal -->
-
+        <div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="cetakmodal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Print UID</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                              <div class="widget-content widget-content-area">
+                       <div class="table-responsive">
+                                                <table class="table table-bordered table-striped mb-4">
+                                                    <tbody class="cetak-detail">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          <!-- modal -->
 
 @endsection('content');
 @push('jsfooter')
 <script type="text/javascript">
 
     $(document).ready(function(){
+        
         load_data();
     })
 
@@ -99,27 +138,25 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/seller/datatable')}}",
+            "url": "{{url('/selbrg/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "seller_id"},
-{data : "seller_email"},
-{data : "seller_telpon"},
-{data : "seller_name"},
-{data : "group_role"},
+{data : "product_id"},
+{data : "category_name"},
+{data : "product_name"},
+{data : "product_sku"},
+{data : "size"},
 
 
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/seller/edit/"+data['seller_id'];
+    let urledit = "{{URL::to('/')}}/selbrg/edit/"+data['product_id'];
     
-    return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['seller_id']+')">Detail</a> '
-    +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['seller_id']+")' class='btn btn-danger'>Delete</a>"
-    +'<a href="{{url('/ganti/show')}}" class="btn btn-success"/>Ganti Password</a> ';    
+    return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
+    +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> ';    
            } },         
             ],
 
@@ -140,14 +177,12 @@
     }
 
 function delete_id(id){
-
-    var ask = confirm("Apakah Anda Yakin?");
-
+    var ask = ("Are Sure?");
     if(ask){
     
   
      $.ajax({
-                url:"{{url('/seller/delete')}}/"+id,
+                url:"{{url('/barang/delete')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -165,7 +200,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/seller/get')}}/"+id,
+                url:"{{url('/barang/print')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -177,21 +212,51 @@ function detail_id(id){
                        $('#detailmodal').modal('show');
                        val = data.content[0];
                        $(".list-detail").html(" ");
-                       body += "<tr><td>ID : <td><td>"+val.seller_id+"<td></tr>";
-body += "<tr><td>E-Mail: <td><td>"+val.seller_email+"<td></tr>";
-body += "<tr><td>No HP: <td><td>"+val.seller_telpon+"<td></tr>";
-body += "<tr><td>Nama Seller: <td><td>"+val.seller_name+"<td></tr>";
-body += "<tr><td>Group : <td><td>"+val.group_role+"<td></tr>";   
+                       body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
+body += "<tr><td>category_name: <td><td>"+val.category_id+"<td></tr>";
+body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
+body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
+body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
     $(".list-detail").html(body);
                     }else{
-                        alert("Seller Detail Tidak Ditemukan") ;
+                        alert("Barang Detail Tidak Ditemukan") ;
                     }
                 },error: function (error) {
                         alert("Terjadi Kesalahan") ;       
                 }
            });
 
-
+}
+function print_id(id){
+      
+      $.ajax({
+                 url:"{{url('/barang/print')}}/"+id,
+                 method: 'GET',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function(response) {
+                     var data = JSON.parse(response);
+                     var body ="";
+                     if(data.content.length > 0){
+                        $('#cetakmodal').modal('show');
+                        val = data.content[0];
+                        $(".cetak-detail").html(" ");
+                        body += "<tr><td>Jumlah : <td></tr>";                      
+                        // <input type="number" id="stepper1" name="stepper1" min="1" max="10" value="5" />
+                        // <br /><br />
+                        // <input type="button" onClick="saveValue('stepper1')" value="Submit" />                           
+                        //  <div class="modal-footer">
+                        //     <button type="button" class="btn btn-primary">Cetak</button>
+                        // </div>                       
+                         $(".cetak-detail").html(body);
+                     }else{
+                         alert("Data Barang Tidak Ditemukan") ;
+                     }
+                 },error: function (error) {
+                         alert("Terjadi Kesalahan") ;       
+                 }
+            });
 }
  
 </script>

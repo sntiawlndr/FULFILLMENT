@@ -5,29 +5,43 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Product 
-                                            <span style="float:right;"><a href="{{url('/product')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span></h4>
+                                         <h4>Proses Keluar Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
+                                <form>                                                                  
+                             
+                                <br>
                                 <div class="widget-content widget-content-area">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
                                                 <tr>
-                                                    <th>Product Id</th>
-                                                    <th>Product Name</th>
-                                                    <th>Description</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>No</th>
+                                                    <th>Seller</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>SKU</th>
+                                                    <th>Ukuran</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Lokasi</th>
+                                                    <th>Action</th>
+
                                                 </tr>
+                                                
                                             </thead>
                                             <tbody>
-
-                                               
-                                                
-                                            </tbody>
                                         </table>
+                                        <div class="form-group row">
+                                            <button href = "{{url('/')}}" type="button" class="btn btn-primary" data-dismiss="modal">Proses</button>
+                                        </div>
                                     </div>
+                                </div>
+                                </div>
+                            </div>
+                           
+</div>
+</form>
+
 
 
 
@@ -36,7 +50,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Product Detail</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Terima Barang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -59,7 +73,33 @@
 </div>
 
         <!-- modal -->
-
+        <div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="cetakmodal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Print UID</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                              <div class="widget-content widget-content-area">
+                       <div class="table-responsive">
+                                                <table class="table table-bordered table-striped mb-4">
+                                                    <tbody class="cetak-detail">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                    </div>
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          <!-- modal -->
 
 @endsection('content');
 @push('jsfooter')
@@ -75,24 +115,26 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/product/datatable')}}",
+            "url": "{{url('/proses/keluar/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "product_id"},
+{data : "out_id"},
+{data : "seller_name"},
 {data : "product_name"},
-{data : "product_description"},
+{data : "product_sku"},
+{data : "size"},
+{data : "amount"},
+{data : "location_name"},
+
+
 
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/product/edit/"+data['product_id'];
-    
-    return '<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
-    +'<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['product_id']+")' class='btn btn-danger'>Delete</a>";
-            
+       
+    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
            } },         
             ],
 
@@ -112,15 +154,13 @@
         });
     }
 
-
-
 function delete_id(id){
-    var ask = confirm("Apakah Anda Yakin?");
+    var ask = ("Are Sure?");
     if(ask){
     
   
      $.ajax({
-                url:"{{url('/product/delete')}}/"+id,
+                url:"{{url('/barang/delete')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -138,7 +178,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/product/get')}}/"+id,
+                url:"{{url('/barang/print')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -151,12 +191,13 @@ function detail_id(id){
                        val = data.content[0];
                        $(".list-detail").html(" ");
                        body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
-body += "<tr><td>Name : <td><td>"+val.product_name+"<td></tr>";
-body += "<tr><td>Category : <td><td>"+val.product_description+"<td></tr>";
-    
+body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
+body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
+body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
+body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
     $(".list-detail").html(body);
                     }else{
-                        alert("Product Detail Tidak Ditemukan") ;
+                        alert("Barang Detail Tidak Ditemukan") ;
                     }
                 },error: function (error) {
                         alert("Terjadi Kesalahan") ;       
@@ -164,5 +205,37 @@ body += "<tr><td>Category : <td><td>"+val.product_description+"<td></tr>";
            });
 
 }
+function print_id(id){
+      
+      $.ajax({
+                 url:"{{url('/baru/print')}}/"+id,
+                 method: 'GET',
+                 cache: false,
+                 contentType: false,
+                 processData: false,
+                 success: function(response) {
+                     var data = JSON.parse(response);
+                     var body ="";
+                     if(data.content.length > 0){
+                        $('#cetakmodal').modal('show');
+                        val = data.content[0];
+                        $(".cetak-detail").html(" ");
+                        body += "<tr><td>Jumlah : <td></tr>";                      
+                        // <input type="number" id="stepper1" name="stepper1" min="1" max="10" value="5" />
+                        // <br /><br />
+                        // <input type="button" onClick="saveValue('stepper1')" value="Submit" />                           
+                        //  <div class="modal-footer">
+                        //     <button type="button" class="btn btn-primary">Cetak</button>
+                        // </div>                       
+                         $(".cetak-detail").html(body);
+                     }else{
+                         alert("Data Barang Tidak Ditemukan") ;
+                     }
+                 },error: function (error) {
+                         alert("Terjadi Kesalahan") ;       
+                 }
+            });
+}
+ 
 </script>
 @endpush
