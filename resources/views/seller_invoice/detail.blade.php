@@ -1,144 +1,156 @@
 @extends('layout.app')
 @section('content')
-<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-table-two">
 
-                            <div class="widget-heading">
-                                <h5 class="">Recent Orders</h5>
-                            </div>
+<br>
+<div id="flHorizontalForm" class="col-lg-12  col-md-6 layout-spacing">
+                            <div class="statbox widget box box-shadow">
+                                <div class="widget-header">                                
+                                    <div class="row">
+                                    <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-6 ">
+                                            <h4>Detail 
+                                            <a href="{{url('/invoice')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                                            </h4>
+                                            <br>
+                                        </div>                                                                        
+                                    </div>
+                                </div>
+                                <div class="widget-content widget-content-area">
+                                    <form>
+                                    <div class="form-group row mb-4">                            
+                                            <label for="e_mail" class="col-xl-1 col-sm-3 col-sm-2 col-form-label">E-mail</label>
+                                            <div class="col-xl-5 col-lg-9 col-sm-5">
+                                                <input type="email" class="form-control" id="order_email" placeholder="" name="order_email"  value="{{$order->order_email}}" required>
+                                                <input type="hidden" class="form-control" id="order_id" name="order_id"  placeholder=""  value="{{$order->order_id}}">
+                                                @csrf
+                                            </div>
+                                        </div>
 
-                            <div class="widget-content">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th><div class="th-content">Customer</div></th>
-                                                <th><div class="th-content">Product</div></th>
-                                                <th><div class="th-content">Invoice</div></th>
-                                                <th><div class="th-content th-heading">Price</div></th>
-                                                <th><div class="th-content">Status</div></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Luke Ivory</span></div></td>
-                                                <td><div class="td-content product-brand text-primary">Headphone</div></td>
-                                                <td><div class="td-content product-invoice">#46894</div></td>
-                                                <td><div class="td-content pricing"><span class="">$56.07</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-success">Paid</span></div></td>
-                                            </tr>
-                                            
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Andy King</span></div></td>
-                                                <td><div class="td-content product-brand text-warning">Nike Sport</div></td>
-                                                <td><div class="td-content product-invoice">#76894</div></td>
-                                                <td><div class="td-content pricing"><span class="">$88.00</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-primary">Shipped</span></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Laurie Fox</span></div></td>
-                                                <td><div class="td-content product-brand text-danger">Sunglasses</div></td>
-                                                <td><div class="td-content product-invoice">#66894</div></td>
-                                                <td><div class="td-content pricing"><span class="">$126.04</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-success">Paid</span></div></td>
-                                            </tr>                                            
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Ryan Collins</span></div></td>
-                                                <td><div class="td-content product-brand text-warning">Sport</div></td>
-                                                <td><div class="td-content product-invoice">#89891</div></td>
-                                                <td><div class="td-content pricing"><span class="">$108.09</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-primary">Shipped</span></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Irene Collins</span></div></td>
-                                                <td><div class="td-content product-brand text-primary">Speakers</div></td>
-                                                <td><div class="td-content product-invoice">#75844</div></td>
-                                                <td><div class="td-content pricing"><span class="">$84.00</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-danger">Pending</span></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content customer-name"><img src="assets/img/90x90.jpg" alt="avatar"><span>Sonia Shaw</span></div></td>
-                                                <td><div class="td-content product-brand text-danger">Watch</div></td>
-                                                <td><div class="td-content product-invoice">#76844</div></td>
-                                                <td><div class="td-content pricing"><span class="">$110.00</span></div></td>
-                                                <td><div class="td-content"><span class="badge badge-success">Paid</span></div></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                        <div class="form-group row mb-4">
+                                            <label for="hEmail" class="col-xl-1 col-sm-3 col-sm-2 col-form-label">Nama</label>
+                                            <div class="col-xl-5 col-lg-9 col-sm-5">
+                                                <input type="text" class="form-control" id="customer_name" placeholder="" name="customer_name" value="{{$order->customer_name}}">
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row mb-4">
+                                            <label for="hEmail" class="col-xl-1 col-sm-3 col-sm-2 col-form-label">No.HP</label>
+                                            <div class="col-xl-5 col-lg-9 col-sm-10">
+                                                <input type="text" class="form-control" id="order_telpon" placeholder="" name="order_telpon" value="{{$order->order_telpon}}">
+                                            </div>
+                                        </div>
+
+                                       
+
+                                        <div class="form-group row mb-4">
+                                            <label for="hEmail" class="col-xl-1 col-sm-3 col-sm-2 col-form-label" >Status</label>
+                                            <div class="col-xl-5 col-lg-9 col-sm-10">
+                                                <input type="text" class="form-control" id="order_status" placeholder="" name="order_status" value="{{$order->order_status}}">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="hEmail" class="col-xl-1 col-sm-3 col-sm-2 col-form-label" >Jumlah Tagihan</label>
+                                            <div class="col-xl-5 col-lg-9 col-sm-10">
+                                                <input type="text" class="form-control" id="amount" placeholder="" name="amount" value="{{$order->amount}}">
+                                                
+                                            </div>
+                                        </div>
+                                        <div id="tabsSimple" class="col-lg-7  col md-6 col-7 layout-spacing">
+                            <div class="statbox widget box box-shadow">
+                                <div class="widget-header">
+                                    <div class="row">
+                                        <div class="col-xl-10 col-md-6 col-sm-10 col-10">
+                                            <h4>Detail</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content widget-content-area simple-tab">
+                                    <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Masuk</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Keluar</a>
+                                        </li>
+                                
+                                    </ul>
+                                    <div class="tab-content" id="simpletabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="table-responsive">
+                                            <table class="table table-bordered table-striped mb-4" id="zero-config">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tgl Masuk</th>
+                                                        <th>Nama</th>
+                                                        <th>Size</th>
+                                                        <th>Qty</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                            <div class="table-responsive">
+                                            <table class="table table-bordered table-striped mb-4" id="zero-config">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Tgl Keluar</th>
+                                                            <th>Nama</th>
+                                                            <th>Size</th>
+                                                            <th>Qty</th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                      <div class="form-group row">
+                                            <div class="col-sm-10">
+                                                <a href="javascript:void" class="btn btn-primary" id="saveButton">Save</a>
+                                                </form>
+                                                
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
+                        
+                        
+                        @endsection('content')
 
-                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-table-three">
+    @push('jsfooter')
+    <script type="text/javascript">
+     $("#saveButton").click(function(){
+   
+    formData = {
+        'order_id':$("#order_id").val(),
+        'order_email':$("#order_email").val(),
+        'customer_name':$("#customer_name").val(),
+        'order_telpon':$("#order_telpon").val(),
+        'order_status':$("#order_status").val(),
+        'amount':$("#amount").val(),
+        '_token':$("input[name='_token']").val()
+    }
 
-                            <div class="widget-heading">
-                                <h5 class="">Top Selling Product</h5>
-                            </div>
-
-                            <div class="widget-content">
-                                <div class="table-responsive">
-                                    <table class="table table-scroll">
-                                        <thead>
-                                            <tr>
-                                                <th><div class="th-content">Product</div></th>
-                                                <th><div class="th-content th-heading">Price</div></th>
-                                                <th><div class="th-content th-heading">Discount</div></th>
-                                                <th><div class="th-content">Sold</div></th>
-                                                <th><div class="th-content">Source</div></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><div class="td-content product-name"><img src="assets/img/90x90.jpg" alt="product"><div class="align-self-center"><p class="prd-name">Headphone</p><p class="prd-category text-primary">Digital</p></div></div></td>
-                                                <td><div class="td-content"><span class="pricing">$168.09</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">$60.09</span></div></td>
-                                                <td><div class="td-content">170</div></td>
-                                                <td><div class="td-content"><a href="javascript:void(0);" class="text-danger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg> Direct</a></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content product-name"><img src="assets/img/90x90.jpg" alt="product"><div class="align-self-center"><p class="prd-name">Shoes</p><p class="prd-category text-warning">Faishon</p></div></div></td>
-                                                <td><div class="td-content"><span class="pricing">$108.09</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">$47.09</span></div></td>
-                                                <td><div class="td-content">130</div></td>
-                                                <td><div class="td-content"><a href="javascript:void(0);" class="text-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg> Google</a></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content product-name"><img src="assets/img/90x90.jpg" alt="product"><div class="align-self-center"><p class="prd-name">Watch</p><p class="prd-category text-danger">Accessories</p></div></div></td>
-                                                <td><div class="td-content"><span class="pricing">$88.00</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">$20.00</span></div></td>
-                                                <td><div class="td-content">66</div></td>
-                                                <td><div class="td-content"><a href="javascript:void(0);" class="text-warning"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg> Ads</a></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content product-name"><img src="assets/img/90x90.jpg" alt="product"><div class="align-self-center"><p class="prd-name">Laptop</p><p class="prd-category text-primary">Digital</p></div></div></td>
-                                                <td><div class="td-content"><span class="pricing">$110.00</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">$33.00</span></div></td>
-                                                <td><div class="td-content">35</div></td>
-                                                <td><div class="td-content"><a href="javascript:void(0);" class="text-info"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg> Email</a></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><div class="td-content product-name"><img src="assets/img/90x90.jpg" alt="product"><div class="align-self-center"><p class="prd-name">Camera</p><p class="prd-category text-primary">Digital</p></div></div></td>
-                                                <td><div class="td-content"><span class="pricing">$126.04</span></div></td>
-                                                <td><div class="td-content"><span class="discount-pricing">$26.04</span></div></td>
-                                                <td><div class="td-content">30</div></td>
-                                                <td><div class="td-content"><a href="javascript:void(0);" class="text-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-right"><polyline points="13 17 18 12 13 7"></polyline><polyline points="6 17 11 12 6 7"></polyline></svg> Referral</a></div></td>
-                                            </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                </div>
-
-            </div>
-@endsection
-          
+    $.ajax({
+                url:"{{url('/invoice/update')}}",
+                method: 'POST',
+                data: formData,
+                cache: false,
+                success: function(response) {
+                   response = JSON.parse(response);
+                   if(response.success == true){
+                        alert('Simpan Data Berhasil');
+                        location.reload();
+                   }else{
+                    alert("Gagal Menyimpan Data");
+                   }
+                },error: function (error) {
+                     alert("Terjadi Kesalahan");          
+                }
+           });
+});
+    </script>
+    @endpush

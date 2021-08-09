@@ -52,7 +52,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="hEmail" >No. HP</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                                <input type="text" class="form-control" id="seller_name" placeholder="" name="seller_name">
+                                                <input type="text" class="form-control" id="seller_telpon" placeholder="" name="seller_telpon">
                                             </div>
                                         </div>
 
