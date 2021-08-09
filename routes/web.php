@@ -85,6 +85,7 @@ Route::get('/seller/delete/{id}', 'SellerController@seller_delete');
 Route::post('/seller/update', 'SellerController@seller_update');
 Route::post('/seller/datatable', 'SellerController@seller_datatable');
 Route::get('/seller/get/{id}', 'SellerController@seller_get');
+Route::get('/ganti/show', 'SellerController@ganti_show');
 
 // Seller Invoice
 
@@ -97,7 +98,7 @@ Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
 Route::post('/invoice/update','InvoiceController@invoice_update');
 Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
 Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
-Route::get('/invoice/detail','InvoiceController@invoice_detail');
+// Route::get('/invoice/detail{id}','InvoiceController@invoice_detail');
 
 
 //Terima Barang Baru

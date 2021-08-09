@@ -36,4 +36,9 @@ class Seller extends Model
         return $delete;
 
     }
+    static function ganti_data_id(){
+        $data = DB::table('fm_seller')->get();
+        return $data;
+
+    }
 }

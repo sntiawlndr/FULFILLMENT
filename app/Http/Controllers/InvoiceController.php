@@ -20,6 +20,7 @@ class InvoiceController extends Controller
      $length = $_POST['length'];
      $start = $_POST['start'];
      $search = $_POST['search']['value'];
+   
 
     
     if($search){   
@@ -41,7 +42,6 @@ class InvoiceController extends Controller
     }
 
     public function invoice_show(){
-
         $data = Order::order_get_data_id_all();
         return view('seller_invoice.invoice_show')->with('data',$data);
     }
@@ -49,14 +49,21 @@ class InvoiceController extends Controller
    
 
     public function invoice_get($id){
+        $data = Order::order_get_by_id($id);
+        return json_encode(array('msg'=>'Sava Data Success', 'content'=>$data, 'success'=>TRUE));
+    }
 
-        $data = Order::invoice_get_by_id($id);
- return json_encode(array('msg'=>'Sava Data Success', 'content'=>$data, 'success'=>TRUE));
+    // public function invoice_detail($order_id){
+        
+    //     $data = Order::order_get_by_id($order_id);
+    //     echo $data;
+    //     exit;
+    //     return view('seller_invoice.detail')->with('order',$data[0]);
+    // }
+    public function invoice_edit($order_id){
+        $data = Order::order_get_by_id($order_id);
 
-}
-    public function invoice_detail(){
-        $data = Order::detail_data_id();
-        return view('seller_invoice.detail')->with('data',$data);
+        return view('seller_invoice.detail')->with('order',$data[0]);
     }
 
 

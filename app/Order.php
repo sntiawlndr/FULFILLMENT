@@ -17,14 +17,16 @@ class Order extends Model
         return $data;
 
     }
-    static function order_get_by_id($id){
-        $data = DB::table("fm_order")->where('order_id',$id)->get();
-        return $data;
-    }
+
     static function detail_data_id(){
         $data = DB::table('fm_order')->get();
         return $data;
 
+    }
+
+    static function order_get_by_id($id){
+        $data = DB::table("fm_order")->where('order_id',$id)->get();
+        return $data;
     }
 
 }
