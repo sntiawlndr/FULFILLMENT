@@ -8,8 +8,7 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4>Edit Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark"
-                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                        <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                 </div>
             </div>
@@ -36,6 +35,7 @@
                     <input type="hidden" class="form-control" name="seller_id" id="seller_id" placeholder=""
                         value="{{$data['sellers']->seller_id}}">
                     @csrf
+
                 </div>
             </div>
        
@@ -132,11 +132,19 @@
 
 @push('jsfooter')
 <script type="text/javascript">
+<<<<<<< HEAD
     var ss = $(".select2").select2({
         tags: true
     });
 
     $(".size").each(function () {
+=======
+    var ss = $("#seller_id").select2({
+        tags: true
+    });
+
+    $(".size").each(function() {
+>>>>>>> fc77fd5795e3c9093b80071e4da57b3ba38ad53d
         if ($(this).val() == "{{$data['barang']->size}}") {
             $(this).attr("checked", "true");
 
@@ -145,7 +153,7 @@
     $("#product_status").val("{{$data['barang']->product_status}}");
 
 
-    $("#saveButton").click(function () {
+    $("#saveButton").click(function() {
 
         formData = {
             'product_id': $("#product_id").val(),
@@ -166,7 +174,7 @@
             method: 'POST',
             data: formData,
             cache: false,
-            success: function (response) {
+            success: function(response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -175,7 +183,7 @@
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 alert("Terjadi Kesalahan");
             }
         });

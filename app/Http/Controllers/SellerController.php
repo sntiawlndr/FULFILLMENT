@@ -26,6 +26,8 @@ class SellerController extends Controller
         $add->seller_telpon = $request->get('seller_telpon'); 
         $add->seller_name = $request->get('seller_name'); 
         $add->group_role = $request->get('group_role'); 
+        // $pw = Seller::generateRandomString();
+        // $add->password = Hash:make($pw);
         $result = $add->save();
 
         if($result){
@@ -72,6 +74,7 @@ class SellerController extends Controller
 
     public function seller_edit($seller_id){
         $data = Seller::seller_get_by_id($seller_id);
+
         return view('seller.seller_edit')->with('seller',$data[0]);
     }
 
@@ -98,6 +101,11 @@ class SellerController extends Controller
         $delete = Seller::seller_delete($id);
         return redirect('/seller');
     }
+    public function ganti_show(){
+        
+        $data = Seller::ganti_data_id();      
+        return view('seller.ganti_password')->with('data',$data[0]);
+    }
 
 
     public function seller_get($id){
@@ -105,6 +113,15 @@ class SellerController extends Controller
         $data = Seller::seller_get_by_id($id);
     return json_encode(array('msg'=>'Sava Data Success', 'content'=>$data, 'success'=>TRUE));
 
-}
+    }
+    // // static function generateRandomString($length = 10) {
+    // //     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    // //     $charactersLength = strlen($characters);
+    // //     $randomString = '';
+    // //     for ($i = 0; $i < $length; $i++) {
+    // //         $randomString .= $characters[rand(0, $charactersLength - 1)];
+    // //     }
+    // //     return $randomString;
+    // }
 
 }

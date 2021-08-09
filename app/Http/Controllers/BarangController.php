@@ -72,7 +72,7 @@ class BarangController extends Controller
 
         $data = Barang::get_data_id();
         return view('admin_barang.barang_upload')->with('data',$data);
-    }
+    } 
 
     public function barang_edit($product_id){
         // $data['barang'] = Barang::barang_get_by_id($seller_id)[0];

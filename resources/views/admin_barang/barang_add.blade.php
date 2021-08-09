@@ -7,8 +7,7 @@
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                     <h4> Add Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark"
-                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                        <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                     <hr>
                 </div>
@@ -121,7 +120,7 @@
         tags: true,
     });
 
-    $("#saveButton").click(function () {
+    $("#saveButton").click(function() {
 
         formData = {
             'seller_id': $("#seller_id").val(),
@@ -139,7 +138,7 @@
             method: 'POST',
             data: formData,
             cache: false,
-            success: function (response) {
+            success: function(response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -148,7 +147,7 @@
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 alert("Terjadi Kesalahan");
             }
         });
