@@ -9,6 +9,7 @@
                                             <h4>Ganti Password
                                             <a href="{{url('/seller')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                                             </h4>
+                                            <br>
                                         </div>                                                                        
                                     </div>
                                 </div>
@@ -18,7 +19,7 @@
 
                                             <label for="hEmail" class="col-xl-5 col-sm-3 col-sm-2 col-form-label">Password Baru</label>
                                             <div class="col-xl-11 col-lg-9 col-sm-10">
-                                                <input type="text" class="form-control" id="product_name" placeholder="" name="product_name">
+                                                <input type="password" class="form-control" id="product_name" placeholder="" name="product_name">
                                                 @csrf
                                             </div>
                                         </div>

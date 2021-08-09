@@ -28,5 +28,10 @@ class Order extends Model
         $data = DB::table("fm_order")->where('order_id',$id)->get();
         return $data;
     }
+    static function bayar_data_id(){
+        $data = DB::table('fm_order')->get();
+        return $data;
+
+    }
 
 }
