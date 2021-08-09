@@ -65,7 +65,11 @@ class InvoiceController extends Controller
 
         return view('seller_invoice.detail')->with('order',$data[0]);
     }
-
+    public function bayar_show(){
+        
+        $data = Order::bayar_data_id();      
+        return view('seller_invoice.bayar')->with('data',$data[0]);
+    }
 
 
 }

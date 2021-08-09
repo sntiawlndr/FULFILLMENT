@@ -123,8 +123,7 @@
     let urledit = "{{URL::to('/')}}/invoice/edit/"+data['order_id'];
     
     return '<a href="'+urledit+'" class="btn btn-primary"/>Detail</a> '
-    +"<a href='javascript:void(0)' onclick='delete_id("+data['order_id']+")' class='btn btn-danger'>Delete</a>"
-    +'<a href="'+urledit+'" class="btn btn-success"/>Ganti Password</a> ';    
+    +'<a href="{{url('/bayar/show')}}" class="btn btn-success"/>Bayar</a> ';  
            } },         
             ],
 

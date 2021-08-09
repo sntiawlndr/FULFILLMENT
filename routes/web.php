@@ -98,6 +98,7 @@ Route::get('/invoice/delete/{id}','InvoiceController@invoice_delete');
 Route::post('/invoice/update','InvoiceController@invoice_update');
 Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
 Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
+Route::get('/bayar/show', 'InvoiceController@bayar_show');
 // Route::get('/invoice/detail{id}','InvoiceController@invoice_detail');
 
 
