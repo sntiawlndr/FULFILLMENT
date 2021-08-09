@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,15 +58,17 @@ Route::post('/gudang/update', 'GudangController@gudang_update');
 Route::post('/gudang/datatable', 'GudangController@gudang_datatable');
 Route::get('/gudang/get/{id}', 'GudangController@gudang_get');
 
+
 //pindah gudang
 Route::get('/pindah/add', 'PindahController@index');
 Route::post('/pindah/save', 'PindahController@pindah_save');
 Route::get('/pindah', 'PindahController@pindah_show');
 Route::get('/pindah/edit/{id}', 'PindahController@pindah_edit');
-Route::get('/pindah/delete/{id}', 'PindahController@pindah_delete');
-Route::post('/pindah/update', 'PindahController@pindahupdate');
+Route::post('/pindah/update', 'PindahController@pindah_update');
 Route::post('/pindah/datatable', 'PindahController@pindah_datatable');
-Route::get('/pindah/detail/{id}', 'PindahController@pindah_get');
+Route::get('/pindah/get/{id}', 'PindahController@pindah_get');
+Route::get('/tpg/show', 'PindahController@tpg_show');
+Route::post('/tpg/datatable', 'PindahController@tpg_datatable');
 
 
 

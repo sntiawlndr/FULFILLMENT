@@ -21,9 +21,9 @@
                 </div>
 
                 <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
-                    <option>Show All</option>
-                    <option>Sudah Lunas</option>
-                    <option>Belum Lunas</option>
+                    <option>show all </option>
+                    <option>enable</option>
+                    <option>Disable</option>
                 </select>
 
                 </form>
@@ -111,13 +111,13 @@
                                     }
                                 },
                                 "columns": [{
-                                        data: "warehouse_id"
+                                        data: "location_id"
                                     },
                                     {
-                                        data: "warehouse_name"
+                                        data: "location_name"
                                     },
                                     {
-                                        data: "warehouse_code"
+                                        data: "location_code"
                                     },
                                     {
                                         data: "address"
@@ -134,13 +134,13 @@
 
 
                                             let urledit = "{{URL::to('/')}}/gudang/edit/" + data[
-                                                'warehouse_id'];
+                                                'location_id'];
 
                                             return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id(' +
-                                                data['warehouse_id'] + ')">Detail</a> ' +
+                                                data['location_id'] + ')">Detail</a> ' +
                                                 '<a href="' + urledit + '" class="btn btn-primary"/>Edit</a> ' +
                                                 "<a href='javascript:void(0)' onclick='delete_id(" + data[
-                                                    'warehouse_id'] + ")' class='btn btn-danger'>Delete</a>";
+                                                    'location_id'] + ")' class='btn btn-danger'>Delete</a>";
                                         }
                                     },
                                 ],
@@ -167,7 +167,7 @@
 
 
                         function delete_id(id) {
-                            var ask = ("Are Sure?");
+                            var ask = confirm("Apakah Anda Yakin?");
                             if (ask) {
 
 
@@ -203,11 +203,15 @@
                                         $('#detailmodal').modal('show');
                                         val = data.content[0];
                                         $(".list-detail").html(" ");
-                                        body += "<tr><td>ID : <td><td>" + val.warehouse_id + "<td></tr>";
-                                        body += "<tr><td>address id: <td><td>" + val.address_id + "<td></tr>";
-                                        body += "<tr><td>warehouse name: <td><td>" + val.warehouse_name +
+                                        body += "<tr><td>ID : <td><td>" + val.location_id + "<td></tr>";
+                                        body += "<tr><td> id: <td><td>" + val.address_id + "<td></tr>";
+                                        body += "<tr><td> Name Gudang: <td><td>" + val.location_name +
                                             "<td></tr>";
-                                        body += "<tr><td>warehouse code: <td><td>" + val.warehouse_code +
+                                        body += "<tr><td>kode: <td><td>" + val.location_code +
+                                            "<td></tr>";
+                                        body += "<tr><td>Address: <td><td>" + val.address +
+                                            "<td></tr>";
+                                        body += "<tr><td>Telepon: <td><td>" + val.address_telepon +
                                             "<td></tr>";
 
                                         $(".list-detail").html(body);
