@@ -20,7 +20,7 @@
                     <div class="form-group col-md-6">
                         <label for="hEmail">Nama Gudang</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" id="warehouse_name" placeholder="" name="warehouse_name">
+                            <input type="text" class="form-control" id="location_name" placeholder="" name="location_name">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -35,7 +35,7 @@
                     <div class="form-group col-md-6">
                         <label for="hEmail">Kode Gudang</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" id="werehouse_code" placeholder="" name="warehouse_code">
+                            <input type="text" class="form-control" id="werehouse_code" placeholder="" name="location_code">
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -119,9 +119,9 @@
 
         formData = {
             'address_id': $("#address_id").val(),
-            'warehouse_name': $("#warehouse_name").val(),
-            'warehouse_code': $("#warehouse_code").val(),
-            'address_telepon': $("address_telepon").val(),
+            'location_name': $("#location_name").val(),
+            'location_code': $("#location_code").val(),
+            'address_telepon': $("location_telepon").val(),
             'warehouse_status': $("#warehouse_status").val(),
             '_token': $("input[name='_token']").val()
         }
