@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 //Product
 Route::get('/home','HomeController@index');
+Route::get('/dashboard','HomeController@dashboard');
 Route::get('/product/add','ProductController@index');
 Route::post('/product/save','ProductController@product_save');
 Route::get('/product','ProductController@product_show');
@@ -72,21 +73,34 @@ Route::post('/invoice/datatable','InvoiceController@invoice_datatable');
 Route::get('/invoice/get/{id}','InvoiceController@invoice_get');
 
 
-//Terima Barang Baru
+//Daftar Barang Baru
 Route::get('/baru','TerimabarangbaruController@baru_show');
 Route::get('/baru/print/{id}','TerimabarangbaruController@baru_print');
 Route::post('/baru/datatable','TerimabarangbaruController@baru_datatable');
+//Terima Barang Baru Detail
 Route::get('/tbb/show','TerimabarangbaruController@tbb_show');
 Route::post('/tbb/datatable','TerimabarangbaruController@tbb_datatable');
+//Terima Barang Baru Summary
+Route::get('/summary/show','TerimabarangbaruController@summary_show');
+Route::post('/summary/datatable','TerimabarangbaruController@summary_datatable');
 
-//Terima Barang Lama
+//Daftar Barang Lama
 Route::get('/lama','TerimabaranglamaController@lama_show');
 Route::post('/lama/datatable','TerimabaranglamaController@lama_datatable');
+//Terima Barang Lama
 Route::get('/tbl/show','TerimabaranglamaController@tbl_show');
-
 Route::post('/tbl/datatable','TerimabaranglamaController@tbl_datatable');
 
 //Keluar Barang
+Route::get('/keluar','KeluarbarangController@keluar_show');
+Route::post('/keluar/datatable','KeluarbarangController@keluar_datatable');
+Route::get('/keluar/get','KeluarbarangController@keluar_detail');
+//Detail Keluar Barang
+Route::get('/detail/keluar','KeluarbarangController@detail_keluar_show');
+Route::post('/detail/keluar/datatable','KeluarbarangController@detail_keluar_datatable');
+//Proses Keluar Barang
+Route::get('/proses/keluar','KeluarbarangController@proses_keluar_show');
+Route::post('/proses/keluar/datatable','KeluarbarangController@proses_keluar_datatable');
 
 //Role
 
@@ -99,6 +113,18 @@ Route::post('/user/save','FmUserController@user_save');
 Route::get('/user','FmUserController@user_show');
 Route::post('/user/datatable','FmUserController@user_datatable');
 
+//Seller Barang
+Route::get('/selbrg/upload','SellerbarangController@upload_show');
+Route::get('/selbrg/add','SellerbarangController@index');
+Route::post('/selbrg/save','SellerbarangController@seller_save');
+Route::get('/selbrg','SellerbarangController@seller_show');
+Route::get('/selbrg/edit/{id}','SellerbarangController@seller_edit');
+Route::get('/selbrg/delete/{id}','SellerbarangController@seller_delete');
+Route::post('/selbrg/update','SellerbarangController@seller_update');
+Route::post('/selbrg/datatable','SellerbarangController@seller_datatable');
+Route::get('/selbrg/get/{id}','SellerbarangController@seller_get');
+Route::get('/selbrg/print/{id}','SellerbarangController@seller_print');
+Route::post('/selbrg/proses', 'SellerbarangController@import_data');
 
 
 

@@ -5,29 +5,11 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Terima Barang Baru</h4>
+                                         <h4>Proses Keluar Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
-                                <form>
-                                <div class="widget-content widget-content-area">                                   
-                                    <div class="form-group row mb-4">
-                                        <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
-                                        {{-- @foreach ($data['tbbs'] as $tbb) --}}
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <input type="text" class = "form-control" name="no_invoice" autocomplete="off" readonly= "" 
-                                                id="no_invoice" >
-                                        </div>
-                                        {{-- value="{{$tbb->no_invoice}}" --}}
-                                        {{-- @endforeach --}}
-                                        
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="hScan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Scan Barcode UID</label>
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class = "form" name="scan" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
+                                <form>                                                                  
                              
                                 <br>
                                 <div class="widget-content widget-content-area">
@@ -36,17 +18,27 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>UID</th>
-                                                    <th>Seller Name</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>Seller</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>SKU</th>
+                                                    <th>Ukuran</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Lokasi</th>
+                                                    <th>Action</th>
+
                                                 </tr>
+                                                
                                             </thead>
                                             <tbody>
                                         </table>
+                                        <div class="form-group row">
+                                            <button href = "{{url('/')}}" type="button" class="btn btn-primary" data-dismiss="modal">Proses</button>
+                                        </div>
                                     </div>
                                 </div>
                                 </div>
                             </div>
+                           
 </div>
 </form>
 
@@ -123,14 +115,19 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/tbb/datatable')}}",
+            "url": "{{url('/proses/keluar/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "inventory_id"},
-{data : "uid"},
+{data : "out_id"},
 {data : "seller_name"},
+{data : "product_name"},
+{data : "product_sku"},
+{data : "size"},
+{data : "amount"},
+{data : "location_name"},
+
 
 
 { data: null, render: function ( data, type, row ) {

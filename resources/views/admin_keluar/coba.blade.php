@@ -5,51 +5,56 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Terima Barang Baru</h4>
+                                         <h4>Daftar Keluar Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
-                                <form>
-                                <div class="widget-content widget-content-area">                                   
-                                    <div class="form-group row mb-4">
-                                        <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
-                                        {{-- @foreach ($data['tbbs'] as $tbb) --}}
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <input type="text" class = "form-control" name="no_invoice" autocomplete="off" readonly= "" 
-                                                id="no_invoice" >
-                                        </div>
-                                        {{-- value="{{$tbb->no_invoice}}" --}}
-                                        {{-- @endforeach --}}
-                                        
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="hScan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Scan Barcode UID</label>
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class = "form" name="scan" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                             
                                 <br>
-                                <div class="widget-content widget-content-area">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped mb-4" id="zero-config">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>UID</th>
-                                                    <th>Seller Name</th>
-                                                    <th class="text-center" width="35%">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                        </table>
+                                
+                                <br>
+                                <div class="col-lg-12 layout-spacing">
+                                    <div class="statbox widget box box-shadow">
+                                        <div class="widget-header">
+                                            <div class="row">
+                                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                    <h4></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <span style="float:right;"><a href="{{url('/process')}}" class="btn btn-primary" style="margin-top:-10%;">Process</a> </span>
+                                    <select class="selectpicker-form-control mb-4 ml-3" data-style="btn btn-outline-info">
+                                        <option>Filter Status(All, Panjualan, dst.)</option>
+                                        <option>All</option>
+                                        <option>Penjualan</option>
+                                    </select>
+                                    <br>                                                                             
+                                            <div class="widget-content widget-content-area">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-hover table-striped table-checkable table-highlight-head mb-4">
+                                                        <thead>                                                            
+                                                            <tr>
+                                                                <th class="checkbox-column">
+                                                                    <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;">
+                                                                        <input type="checkbox" class="new-control-input todochkbox" id="todoAll">
+                                                                        <span class="new-control-indicator"></span>
+                                                                    </label>
+                                                                </th>
+                                                                <th class="">No</th>
+                                                                <th class="">No Transaksi</th>
+                                                                <th class="">Seller</th>
+                                                                <th class="">Total Jumlah</th>
+                                                                <th class="">Status</th>
+                                                                <th class="text-center" width="35%">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
                                     </div>
-                                </div>
-                                </div>
-                            </div>
-</div>
-</form>
+                                
 
+                                                            
+         
 
 
 
@@ -58,7 +63,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Terima Barang</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Admin Keluar Barang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -123,21 +128,22 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/tbb/datatable')}}",
+            "url": "{{url('/keluar/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "inventory_id"},
-{data : "uid"},
+{data : "out_id"},
+{data : "no_invoice"},
 {data : "seller_name"},
-
+{data : "amount"},
+{data : "seller_status"},
 
 { data: null, render: function ( data, type, row ) {
 
 
        
-    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
+   return '<a href="javascript:void(0)" class="btn btn-success" onclick="detail_id('+data['inventory_id']+')">Detail</a> ';  
            } },         
             ],
 
@@ -181,7 +187,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/barang/print')}}/"+id,
+                url:"{{url('/keluar/get')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -193,14 +199,13 @@ function detail_id(id){
                        $('#detailmodal').modal('show');
                        val = data.content[0];
                        $(".list-detail").html(" ");
-                       body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
-body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
-body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
-body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
-body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
+                       body += "<tr><td>No Transaksi : <td><td>"+val.no_invoice+"<td></tr>";
+body += "<tr><td>Nama Seller: <td><td>"+val.seller_name+"<td></tr>";
+body += "<tr><td>Total Jumlah: <td><td>"+val.amount+"<td></tr>";
+body += "<tr><td>Status: <td><td>"+val.location_status+"<td></tr>";
     $(".list-detail").html(body);
                     }else{
-                        alert("Barang Detail Tidak Ditemukan") ;
+                        alert("Detail Tidak Ditemukan") ;
                     }
                 },error: function (error) {
                         alert("Terjadi Kesalahan") ;       

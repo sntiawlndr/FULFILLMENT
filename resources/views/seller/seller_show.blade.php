@@ -27,7 +27,7 @@
                                         <option>Belum Lunas</option>
                                     </select>  
                                                                     
-                                </form>
+                               
                                 <br>
                                 <span style="float:right;"><a href="{{url('/seller/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
                                 <br>
@@ -139,7 +139,7 @@
     }
 
 function delete_id(id){
-    var ask = ("Are Sure?");
+    var ask = confirm("Apakah Anda Yakin?");
     if(ask){
     
   

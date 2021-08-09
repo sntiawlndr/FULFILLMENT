@@ -129,6 +129,7 @@
 <script type="text/javascript">
 
     $(document).ready(function(){
+        
         load_data();
     })
 
@@ -145,7 +146,7 @@
          "columns":[
 {data : "product_id"},
 {data : "seller_name"},
-{data : "seller_name"},
+{data : "category_name"},
 {data : "product_name"},
 {data : "product_sku"},
 {data : "size"},
@@ -180,7 +181,7 @@
     }
 
 function delete_id(id){
-    var ask = ("Are Sure?");
+    var ask = confirm("Apakah Anda Yakin?");
     if(ask){
     
   
@@ -203,7 +204,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/barang/print')}}/"+id,
+                url:"{{url('/barang/get')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -216,8 +217,9 @@ function detail_id(id){
                        val = data.content[0];
                        $(".list-detail").html(" ");
                        body += "<tr><td>ID : <td><td>"+val.product_id+"<td></tr>";
-body += "<tr><td>seller id: <td><td>"+val.seller_id+"<td></tr>";
-body += "<tr><td>nama barang: <td><td>"+val.product_name+"<td></tr>";
+body += "<tr><td>Seller: <td><td>"+val.seller_name+"<td></tr>";
+body += "<tr><td>Kategori: <td><td>"+val.category_name+"<td></tr>";
+body += "<tr><td>Nama Barang: <td><td>"+val.product_name+"<td></tr>";
 body += "<tr><td>SKU: <td><td>"+val.product_sku+"<td></tr>";
 body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";   
     $(".list-detail").html(body);

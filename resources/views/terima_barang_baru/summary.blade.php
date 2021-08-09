@@ -5,7 +5,7 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Terima Barang Baru</h4>
+                                         <h4>Summary Terima Barang Baru</h4>
                                         </div>                 
                                     </div>
                                 </div>
@@ -35,15 +35,19 @@
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>UID</th>
-                                                    <th>Seller Name</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>Nama</th>
+                                                    <th>Quantity</th>                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                         </table>
                                     </div>
+                                </div>
+                                </div>
+                                <hr>
+                                <div class="form-group row">
+                                    <button href="javascript:void" type="button" class="btn btn-primary"
+                                        data-dismiss="modal">Simpan</button>
                                 </div>
                                 </div>
                             </div>
@@ -123,22 +127,22 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/tbb/datatable')}}",
+            "url": "{{url('/summary/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "inventory_id"},
-{data : "uid"},
 {data : "seller_name"},
+{data : "quantity"},
 
 
-{ data: null, render: function ( data, type, row ) {
+
+// { data: null, render: function ( data, type, row ) {
 
 
        
-    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
-           } },         
+//     return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
+//            } },         
             ],
 
             "oLanguage": {

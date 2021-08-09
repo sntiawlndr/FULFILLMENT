@@ -115,7 +115,7 @@
 
 
 function delete_id(id){
-    var ask = ("Are Sure?");
+    var ask = confirm("Apakah Anda Yakin?");
     if(ask){
     
   

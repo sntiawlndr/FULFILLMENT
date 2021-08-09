@@ -5,12 +5,13 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Terima Barang Baru</h4>
+                                         <h4>Detail Keluar Barang</h4>
                                         </div>                 
                                     </div>
                                 </div>
                                 <form>
-                                <div class="widget-content widget-content-area">                                   
+                                <div class="widget-content widget-content-area">
+                                    <div class="scroll" id="scroll">                                   
                                     <div class="form-group row mb-4">
                                         <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
                                         {{-- @foreach ($data['tbbs'] as $tbb) --}}
@@ -22,12 +23,7 @@
                                         {{-- @endforeach --}}
                                         
                                     </div>
-                                    <div class="mb-4">
-                                        <label for="hScan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Scan Barcode UID</label>
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class = "form" name="scan" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
+                                    
                              
                                 <br>
                                 <div class="widget-content widget-content-area">
@@ -36,9 +32,11 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>UID</th>
-                                                    <th>Seller Name</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>Seller</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>SKU</th>
+                                                    <th>Ukuran</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -113,7 +111,15 @@
 @push('jsfooter')
 <script type="text/javascript">
 
+ 
     $(document).ready(function(){
+//     var table = $('#tabel-data').DataTable( {
+//     scrollY: "300px",
+//     scrollX: true,
+//     scrollCollapse: true
+ 
+// } );
+// } );
         load_data();
     })
 
@@ -123,14 +129,17 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/tbb/datatable')}}",
+            "url": "{{url('/detail/keluar/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "inventory_id"},
-{data : "uid"},
+{data : "out_id"},
 {data : "seller_name"},
+{data : "product_name"},
+{data : "product_sku"},
+{data : "product_size"},
+
 
 
 { data: null, render: function ( data, type, row ) {

@@ -4,7 +4,7 @@ namespace App;
 use App\Barang;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\ToModel;
-
+use DB;
 class Upload extends Model
 {
    

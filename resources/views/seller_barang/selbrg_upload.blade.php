@@ -1,55 +1,63 @@
 @extends('layout.app')
 @section('content')
+<<<<<<< HEAD
+=======
+<br>
+>>>>>>> fc9c6b9ca64e23cc162101618f212e3d065687a8
 <div id="tableStriped" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Terima Barang Baru</h4>
+                                         <h4>Upload CSV
+                                            <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>                                            
+                                         </h4>
                                         </div>                 
                                     </div>
                                 </div>
-                                <form>
-                                <div class="widget-content widget-content-area">                                   
-                                    <div class="form-group row mb-4">
-                                        <label for="hNomorPenerimaan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomer Penerimaan</label>
-                                        {{-- @foreach ($data['tbbs'] as $tbb) --}}
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <input type="text" class = "form-control" name="no_invoice" autocomplete="off" readonly= "" 
-                                                id="no_invoice" >
-                                        </div>
-                                        {{-- value="{{$tbb->no_invoice}}" --}}
-                                        {{-- @endforeach --}}
-                                        
-                                    </div>
-                                    <div class="mb-4">
-                                        <label for="hScan" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Scan Barcode UID</label>
-                                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                                            <textarea class = "form" name="scan" autocomplete="off"></textarea>
-                                        </div>
-                                    </div>
-                             
+                                <br>
+                                <form action="{{url('/upload/proses')}}" method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>                                  
+                                    </div>  
+                                    
+                                    {{-- <div class="form-group">                                    
+                                        <input type="file" class="custom-file-input"  name="file">
+                                        <input type="submit" value="Upload" class="btn btn-primary">
+                                    </div>                 --}}                                
+                                
+                                </form>
+                                <br>
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">                                     
+                                        <a href="{{url('/barang/cek')}}" class="btn btn-primary" style="float:right;margin-top: -1%;color:#fff;">Cek</a>                                           
+                                    </div> 
+                                </div>
+                                          
+                               
                                 <br>
                                 <div class="widget-content widget-content-area">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive multiple">                                        
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>UID</th>
-                                                    <th>Seller Name</th>
-                                                    <th class="text-center" width="35%">Action</th>
+                                                    <th>No</th>                                                    
+                                                    <th>Nama Barang</th>
+                                                    <th>SKU</th>
+                                                    <th>Ukuran</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                               
+                                                
+                                            </tbody>
                                         </table>
                                     </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
-</div>
-</form>
-
 
 
 
@@ -58,7 +66,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Terima Barang</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Barang Detail</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
@@ -81,37 +89,11 @@
 </div>
 
         <!-- modal -->
-        <div class="modal fade" id="cetakmodal" tabindex="-1" role="dialog" aria-labelledby="cetakmodal" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Print UID</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                              <div class="widget-content widget-content-area">
-                       <div class="table-responsive">
-                                                <table class="table table-bordered table-striped mb-4">
-                                                    <tbody class="cetak-detail">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                    </div>
-                </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-          <!-- modal -->
 
 @endsection('content');
 @push('jsfooter')
 <script type="text/javascript">
+// var firstUpload = new FileUploadWithPreview('myFirstImage');
 
     $(document).ready(function(){
         load_data();
@@ -123,22 +105,27 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/tbb/datatable')}}",
+            "url": "{{url('/barang/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
-{data : "inventory_id"},
-{data : "uid"},
-{data : "seller_name"},
+{data : "product_id"},
+{data : "product_name"},
+{data : "product_sku"},
+{data : "size"},
 
 
-{ data: null, render: function ( data, type, row ) {
+// { data: null, render: function ( data, type, row ) {
 
 
-       
-    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
-           } },         
+//     let urledit = "{{URL::to('/')}}/barang/edit/"+data['product_id'];
+    
+//     return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
+//     +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
+//     +"<a href='javascript:void(0)' onclick='delete_id("+data['product_id']+")' class='btn btn-danger'>Delete</a>"
+//     +'<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Print</a> ';    
+//            } },         
             ],
 
             "oLanguage": {
@@ -147,7 +134,7 @@
                 "sInfo": "Showing page PAGE of PAGES",
                 "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
                 "sSearchPlaceholder": "Search...",
-               "sLengthMenu": "Results :  _MENU_",
+               "sLengthMenu": "Results :  MENU",
             },
             "stripeClasses": [],
             "lengthMenu": [5, 10, 20, 50,100,500,1000],
@@ -156,6 +143,7 @@
 
         });
     }
+
 
 function delete_id(id){
     var ask = ("Are Sure?");
@@ -181,7 +169,7 @@ function delete_id(id){
 function detail_id(id){
       
      $.ajax({
-                url:"{{url('/barang/print')}}/"+id,
+                url:"{{url('/barang/get')}}/"+id,
                 method: 'GET',
                 cache: false,
                 contentType: false,
@@ -208,37 +196,7 @@ body += "<tr><td>ukuran : <td><td>"+val.size+"<td></tr>";
            });
 
 }
-function print_id(id){
-      
-      $.ajax({
-                 url:"{{url('/baru/print')}}/"+id,
-                 method: 'GET',
-                 cache: false,
-                 contentType: false,
-                 processData: false,
-                 success: function(response) {
-                     var data = JSON.parse(response);
-                     var body ="";
-                     if(data.content.length > 0){
-                        $('#cetakmodal').modal('show');
-                        val = data.content[0];
-                        $(".cetak-detail").html(" ");
-                        body += "<tr><td>Jumlah : <td></tr>";                      
-                        // <input type="number" id="stepper1" name="stepper1" min="1" max="10" value="5" />
-                        // <br /><br />
-                        // <input type="button" onClick="saveValue('stepper1')" value="Submit" />                           
-                        //  <div class="modal-footer">
-                        //     <button type="button" class="btn btn-primary">Cetak</button>
-                        // </div>                       
-                         $(".cetak-detail").html(body);
-                     }else{
-                         alert("Data Barang Tidak Ditemukan") ;
-                     }
-                 },error: function (error) {
-                         alert("Terjadi Kesalahan") ;       
-                 }
-            });
-}
- 
+
+
 </script>
 @endpush

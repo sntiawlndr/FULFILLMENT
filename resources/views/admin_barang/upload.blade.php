@@ -17,6 +17,7 @@
 					{{ csrf_field() }}
  
 					<div class="form-group">
+						
 						<b>File Gambar</b><br/>
 						<input type="file" name="file">
 					</div>
