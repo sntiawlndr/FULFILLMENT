@@ -10,7 +10,7 @@ class Gudang extends Model
 {
     protected $table = "warehouse_location";
     protected $primaryKey = 'location_id';
-    protected $fillable = ['location_id', 'address_id', 'location_name', 'location_code','creator','location_status','address_id','warehouse_status'];
+    protected $fillable = ['location_name', 'location_code','creator','location_status','address_id','warehouse_status'];
 
 
     static function get_data_id_all()

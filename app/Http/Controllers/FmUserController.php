@@ -127,7 +127,7 @@ class FmUserController extends Controller
 
 
     public function user_delete($id){
-        $delete = FmUser::user_delete($id);
+        $delete = FmUser::user_delete_by_id($id);
         return redirect('/user');
     }
 

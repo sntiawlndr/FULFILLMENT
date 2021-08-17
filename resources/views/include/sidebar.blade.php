@@ -19,37 +19,6 @@
                         </svg>
                         <span>Dashboard</span>
                     </div>
-<<<<<<< HEAD
-                </div>
-                <div class="shadow-bottom"></div>
-                <ul class="list-unstyled menu-categories" id="accordionExample">
-                    <li class="menu active">
-                        <a href="{{url('/dashboard')}}" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                <span>Dashboard</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/dashboard')}}">Dashboard Perbaikan</a>
-                            </li>                            
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/category')}}">Daftar Kategori</a>
-                            </li>                            
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/barang')}}">Daftar Barang</a>
-                            </li>
-                        </ul>
-                        
-=======
                     <div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
                             <polyline points="9 18 15 12 9 6"></polyline>
@@ -67,7 +36,6 @@
                     </li>
                 </ul>
 
->>>>>>> fc77fd5795e3c9093b80071e4da57b3ba38ad53d
 
                 <ul class="list-unstyled menu-categories" id="accordionExample">
                     <li class="menu active">
@@ -99,13 +67,11 @@
 
 
 
-
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="{{url('/invoice')}}">Seller Invoice</a>
+                                <a href="{{url('/baru')}}">Daftar Barang Baru</a>
                             </li>
                         </ul>
-
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
                                 <a href="{{url('/baru')}}">Daftar Barang Lama</a>
@@ -115,12 +81,7 @@
 
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="{{url('/tbb/show')}}">Terima Barang Baru Detail</a>
-                            </li>
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/summary/show')}}">Terima Barang Baru Summary</a>
+                                <a href="{{url('/tbb/show')}}">Terima Barang Baru</a>
                             </li>
                         </ul>
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
@@ -144,27 +105,8 @@
                         </a>
                         <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                             <li class="active">
-                                <a href="{{url('/keluar')}}">Keluar Barang</a>
+                                <a href="{{url('/kb')}}">Keluar Barang</a>
                             </li>
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/detail/keluar')}}">Detail Keluar Barang</a>
-                            </li>
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/proses/keluar')}}">Proses Keluar Barang</a>
-                            </li>
-<<<<<<< HEAD
-                        </ul>
-                        <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
-                            <li class="active">
-                                <a href="{{url('/selbrg')}}">Seller Barang</a>
-                            </li>
-                        </ul>
-                        
-=======
                             <ul class="collapse submenu recent-submenu mini-recent-submenu list-unstyled show" id="dashboard" data-parent="#accordionExample">
                                 <li class="active">
                                     <a href="{{url('/gudang')}}">Daftar Gudang </a>
@@ -174,7 +116,6 @@
                                         <a href="{{url('/pindah')}}">Pindah Gudang </a>
                                     </li>
                                 </ul>
->>>>>>> fc77fd5795e3c9093b80071e4da57b3ba38ad53d
 
                     </li>
 
