@@ -48,14 +48,40 @@
                 <br>
                 <div class="form-group col-md-4">
                     <label for="exampleFormControlInput1">jumlah</label>
-                    <div class="col-xl-20 col-lg-10 col-sm-10">
+                    <div class="col-xl-10 col-lg-9 col-sm-9">
                         <input type="number" id="warehouse_detail_id" name="quantity" min="1" max="5">
                     </div>
                 </div>
-                <br>g
+                <br>
                 <div class="form-group row">
                     <div class="col-sm-10">
-                        <a href="javascript:void" class="btn btn-primary" id="saveButton">Save</a>
+                        <a href="javascript:void" class="btn btn-primary" id="saveButton">Tambah</a>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-4" id="zero-config">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Seller</th>
+                                <th>Nama Barang</th>
+                                <th>SKU</th>
+                                <th>Jumlah</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <a href="javascript:void" class="btn btn-primary" id="saveButton">Simpan</a>
                     </div>
                 </div>
 

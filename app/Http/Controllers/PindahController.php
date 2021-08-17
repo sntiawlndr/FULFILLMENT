@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\WarehouseDetail;
 use App\Pindah;
 
 use DB;
@@ -43,15 +44,16 @@ class PindahController extends Controller
         $length = $_POST['length'];
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
+        // $join = "(SELECT uid FROM warehouse_detail WHERE warehouse_id = warehouse.warehouse_id) as uid, ";
 
 
         if ($search) {
 
             $query = "warehouse_date '%$search%' ";
-            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse WHERE $query )jumdata FROM warehouse WHERE $query LIMIT $start,$length ");
+            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse WHERE $query )jumdata  FROM warehouse WHERE $query LIMIT $start,$length ");
         } else {
 
-            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse)jumdata FROM warehouse LIMIT $start,$length ");
+            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse)jumdata  FROM warehouse LIMIT $start,$length ");
         }
         //count total data
 

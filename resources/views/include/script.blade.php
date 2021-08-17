@@ -45,5 +45,7 @@
         $('[data-toggle="tooltip"]').tooltip()
     </script>
 
+<script src="{{asset('assets/js/select2_modified.js')}}"></script>
+
     
         

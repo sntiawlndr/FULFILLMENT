@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Gudang;
 use App\Address;
+use App\CitiesModel;
+use App\ProvincesModel;
 
 use DB;
 
@@ -14,7 +16,11 @@ class GudangController extends Controller
     function index()
     {
 
-        return view('admin_gudang.gudang_add');
+        $data['gudangs']= Gudang::get_data_id_all();
+        $data['addresses']= Address::get_data_id_all();
+        $data['cities']= CitiesModel::get_data_id_all();
+        $data['provinces']= ProvincesModel::get_data_id_all();
+        return view('admin_gudang.gudang_add')->with('data',$data);
     }
     public function gudang_save(Request $request)
     {
@@ -47,7 +53,7 @@ class GudangController extends Controller
 
         if ($search) {
 
-            $query = "location_name LIKE '%$search%' OR location_id LIKE '%$search%'  OR address_telepon LIKE '%$search%'  OR location_status LIKE '%$search%'";
+            $query = "location_name LIKE '%$search%' OR location_code LIKE '%$search%' ";
             $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse_location WHERE $query )jumdata, $join FROM warehouse_location WHERE $query LIMIT $start,$length ");
         } else {
 
@@ -114,6 +120,12 @@ class GudangController extends Controller
         $join = "(SELECT address FROM fm_address WHERE address_id = warehouse_location.address_id) as address,";
         $join .= "(SELECT address_telepon FROM fm_address WHERE address_id = warehouse_location.address_id) as address_telepon ";
         $data = DB::SELECT("SELECT *, $join FROM warehouse_location WHERE location_id= $id ");
+        return json_encode(array('msg' => 'Sava Data Success', 'content' => $data, 'success' => TRUE));
+    }
+
+    public function get_kecamatan(){
+        $provinsi=$_POST['provinsi'];
+        $data = DB::SELECT("SELECT * FROM cn_zone WHERE country_id= $provinsi ");
         return json_encode(array('msg' => 'Sava Data Success', 'content' => $data, 'success' => TRUE));
     }
 }

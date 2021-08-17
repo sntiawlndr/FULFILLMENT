@@ -158,7 +158,7 @@ function detail_id(id){
                        val = data.content[0];
                        $(".list-detail").html(" ");
                        body += "<tr><td>ID : <td><td>"+val.user_id+"<td></tr>";
-body += "<tr><td>Email  : <td><td>"+val.email+"<td></tr>";
+        body += "<tr><td>Email  : <td><td>"+val.email+"<td></tr>";
 body += "<tr><td>Nama : <td><td>"+val.name+"<td></tr>";
 body += "<tr><td>NoHp : <td><td>"+val.user_telepon+"<td></tr>";
 body += "<tr><td>Group Role : <td><td>"+val.group_role+"<td></tr>";    

@@ -59,6 +59,7 @@ Route::get('/gudang/delete/{id}', 'GudangController@gudang_delete');
 Route::post('/gudang/update', 'GudangController@gudang_update');
 Route::post('/gudang/datatable', 'GudangController@gudang_datatable');
 Route::get('/gudang/get/{id}', 'GudangController@gudang_get');
+Route::post('gudang/getkecamatan','GudangController@get_kecamatan');
 
 
 //pindah gudang
@@ -168,7 +169,10 @@ Route::get('/selbrg/get/{id}','SellerbarangController@seller_get');
 Route::get('/selbrg/print/{id}','SellerbarangController@seller_print');
 Route::post('/selbrg/proses', 'SellerbarangController@import_data');
 
-
+#module
+Route::post('/select2/get-raw', 'ModuleController@select2_get_raw');
+Route::get('/select2-group/get-like/{query?}', 'ModuleController@select2_get_like');
+#module
 
 
 
