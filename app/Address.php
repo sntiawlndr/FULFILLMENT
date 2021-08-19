@@ -9,7 +9,7 @@ class Address extends Model
 {
     protected $table = "fm_address";
     protected $primaryKey = 'address_id';
-    protected $fillable = ['seller_id', 'address', 'address_telpon', 'address_city', 'address_district', 'country_id'];
+    protected $fillable = ['seller_id', 'address', 'address_telepon', 'address_city', 'address_districts', 'country_id','address_postal_code'];
 
 
     static function get_data_id_all()

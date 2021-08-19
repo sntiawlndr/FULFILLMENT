@@ -110,9 +110,11 @@
                                         '_token': $("input[name='_token']").val()
                                     }
                                 },
-                                "columns": [{
-                                        data: "location_id"
-                                    },
+                                "columns": [{ "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
                                     {
                                         data: "location_name"
                                     },
@@ -204,7 +206,7 @@
                                         val = data.content[0];
                                         $(".list-detail").html(" ");
                                         body += "<tr><td>ID : <td><td>" + val.location_id + "<td></tr>";
-                                        body += "<tr><td> id: <td><td>" + val.address_id + "<td></tr>";
+                                        body += "<tr><td> Id Adress: <td><td>" + val.address_id + "<td></tr>";
                                         body += "<tr><td> Name Gudang: <td><td>" + val.location_name +
                                             "<td></tr>";
                                         body += "<tr><td>kode: <td><td>" + val.location_code +

@@ -21,12 +21,13 @@
                         <label for="hEmail">Nama Gudang</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <input type="text" class="form-control" id="location_name" placeholder="" name="location_name">
+                            {{-- <input type="hidden" class="form-control" id="address_id" placeholder="" name="address_id"> --}}
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="hEmail">provinsi</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select onchange="getProv()" class="form-control select2" id="address_id" name="address_id">
+                            <select onchange="getProv()" class="form-control select2" id="address_prov" name="address_prov">
                                 @foreach ($data['provinces'] as $provinsi)
                         <option value="{{$provinsi->prov_id}}">{{$provinsi->prov_name}}</option> 
 
@@ -115,6 +116,8 @@
                             </select>
                         </div>
                     </div>
+
+
                     <div class="form-group col-md-6">
                         <label for="hEmail">Kode Pos</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -130,7 +133,37 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label for="hEmail"></label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <div id="map" style="width:100%;height:50px;"></div>
+                            <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDfHGKSbR4aEs2CLxlLI0VqIEYWZgwPygc"></script>
+                            <script>
+                            function initialize() {
+                              var propertiPeta = {
+                                center:new google.maps.LatLng(-6.909538576730218, 107.60837029646565),
+                                zoom:9,
+                                mapTypeId:google.maps.MapTypeId.ROADMAP
+                              };
+                              
+                              var peta = new google.maps.Map(document.getElementById("map"), propertiPeta);
+                              
+                              // membuat Marker
+                              var marker=new google.maps.Marker({
+                                  position: new google.maps.LatLng(-6.909538576730218, 107.60837029646565),
+                                  map: peta,
+                                  animation: google.maps.Animation.BOUNCE
+                              });
+                            
+                            }
+                            
+                            // event jendela di-load  
+                            google.maps.event.addDomListener(window, 'load', initialize);
+                            </script>
+                        </div>
+                    </div>
 
+                    
 
                     <div class="form-group col-md-6">
                         <label for="hEmail">Alamat</label>
@@ -168,8 +201,13 @@
             'address_id': $("#address_id").val(),
             'location_name': $("#location_name").val(),
             'location_code': $("#location_code").val(),
-            'address_telepon': $("location_telepon").val(),
+            'address_telepon': $("#address_telepon").val(),
             'warehouse_status': $("#warehouse_status").val(),
+            'address': $("#address").val(),
+            'address_telepon': $("#address_telepon").val(),
+            'address_prov': $("#address_prov").val(),
+            'address_city': $("#address_city").val(),
+            'address_kec': $("#address_kec").val(),
             '_token': $("input[name='_token']").val()
         }
 
@@ -195,7 +233,7 @@
     });
 
     function getProv() {
-       var clause = {fields:"prov_id",values:$("#address_id").val()};
+       var clause = {fields:"prov_id",values:$("#address_prov").val()};
         $("#address_city").select2_modified({url:"{{url('/select2/get-raw')}}",label:'Pilih Kota',token:$("input[name='_token']").val(),field:"cities",id:"city_id",name:"city_name",clause:clause});
         // baris ketiga menunjukan nama tabel tujuan, baris kesatu menunjukan where nya
    }
