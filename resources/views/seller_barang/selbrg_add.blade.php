@@ -6,21 +6,19 @@
         <div class="widget-header">
             <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                    <h4> Add Barang
-                        <a href="{{url('/barang')}}" class="btn btn-dark"
-                            style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
+                    <h4> Add Barang Seller
+                        <a href="{{url('/selbrg')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>
                     </h4>
                     <hr>
                 </div>
             </div>
         </div>
         <div class="widget-content widget-content-area">
-            <br>
-            
+            <br>           
             <div class="form-group row mb-4">
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select class="form-control select2" name="catagory_id">
+                    <select class="form-control select2" id="category_id" name="category_id">
                         {{-- data jamak dijadikan satu  --}}
                         {{-- dibawah ini yg td diedit --}}
                         @foreach ($categories as $category)
@@ -33,6 +31,7 @@
                     @csrf
                 </div>
             </div>
+
             <div class="form-group row mb-4">
                 <label for="hPassword" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Barang</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -105,11 +104,10 @@
         tags: true,
     });
 
-    $("#saveButton").click(function () {
+    $("#saveButton").click(function() {
 
-        formData = {
-            'product_id': $("#product_id").val(),
-            'category_id': $("#category_id").val(),
+        formData = {           
+            'category_id': $("#category_id").val(),            
             'product_name': $("#product_name").val(),
             'product_sku': $("#product_sku").val(),
             'size': $(".size:checked").val(),
@@ -123,7 +121,7 @@
             method: 'POST',
             data: formData,
             cache: false,
-            success: function (response) {
+            success: function(response) {
                 response = JSON.parse(response);
                 if (response.success == true) {
                     alert('Simpan Data Berhasil');
@@ -132,7 +130,7 @@
                     alert("Gagal Menyimpan Data");
                 }
             },
-            error: function (error) {
+            error: function(error) {
                 alert("Terjadi Kesalahan");
             }
         });

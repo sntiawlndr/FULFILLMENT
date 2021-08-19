@@ -25,6 +25,7 @@ class KeluarbarangController extends Controller
         $search = $_POST['search']['value'];
         $join = "(SELECT no_invoice FROM fm_order WHERE order_id = inventory_out.order_id) as no_invoice,";
        $join .= "(SELECT seller_name FROM fm_seller WHERE seller_id = inventory_out.seller_id) as seller_name,";
+       $join .= "(SELECT seller_status FROM fm_seller WHERE seller_id = inventory_out.seller_id) as seller_status,";
        $join .= "(SELECT amount FROM fm_order WHERE order_id = inventory_out.order_id) as amount,"; 
        $join .= "(SELECT location_status FROM warehouse_location WHERE location_id = inventory_out.location_id) as location_status"; 
        if($search){   
@@ -131,7 +132,7 @@ class KeluarbarangController extends Controller
     public function keluar_detail($id){
 
         $data = Keluarbarang::keluar_detail_by_id($id);
-    return json_encode(array('msg'=>'Save Data Success', 'content'=>$data, 'success'=>TRUE));
+        return json_encode(array('msg'=>'Save Data Success', 'content'=>$data, 'success'=>TRUE));
 
 }
 

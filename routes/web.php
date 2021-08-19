@@ -42,10 +42,14 @@ Route::get('/barang/upload', 'BarangController@upload_show');
 Route::get('/barang/add', 'BarangController@index');
 Route::post('/barang/save', 'BarangController@barang_save');
 Route::get('/barang', 'BarangController@barang_show');
+Route::get('/detail', 'BarangController@detail');
 Route::get('/barang/edit/{id}', 'BarangController@barang_edit');
 Route::get('/barang/delete/{id}', 'BarangController@barang_delete');
 Route::post('/barang/update', 'BarangController@barang_update');
 Route::post('/barang/datatable', 'BarangController@barang_datatable');
+Route::post('/detail/datatable', 'BarangController@detail_datatable');
+Route::get('/barang/detail/{id}', 'BarangController@barang_detail');
+Route::post('/form', 'BarangController@form_datatable');
 Route::get('/barang/get/{id}', 'BarangController@barang_get');
 Route::get('/barang/print/{id}', 'BarangController@barang_print');
 Route::post('/upload/proses', 'BarangController@import_data');
@@ -161,19 +165,27 @@ Route::get('/selbrg/upload','SellerbarangController@upload_show');
 Route::get('/selbrg/add','SellerbarangController@index');
 Route::post('/selbrg/save','SellerbarangController@seller_save');
 Route::get('/selbrg','SellerbarangController@seller_show');
-Route::get('/selbrg/edit/{id}','SellerbarangController@seller_edit');
+Route::get('/selbrg/edit/{id}','SellerbarangController@selbrg_edit');
 Route::get('/selbrg/delete/{id}','SellerbarangController@seller_delete');
 Route::post('/selbrg/update','SellerbarangController@seller_update');
 Route::post('/selbrg/datatable','SellerbarangController@seller_datatable');
+Route::post('/seldetail/datatable','SellerbarangController@seldetail_datatable');
+Route::get('/selbrg/detail','SellerbarangController@seldetail_show');
+Route::get('/detailselbrg/{id}','SellerbarangController@detail_selbrg');
 Route::get('/selbrg/get/{id}','SellerbarangController@seller_get');
 Route::get('/selbrg/print/{id}','SellerbarangController@seller_print');
 Route::post('/selbrg/proses', 'SellerbarangController@import_data');
+
 
 #module
 Route::post('/select2/get-raw', 'ModuleController@select2_get_raw');
 Route::get('/select2-group/get-like/{query?}', 'ModuleController@select2_get_like');
 #module
 
+//Import CSV
+Route::get('/importExportView', 'MyController@importExportView');
+Route::get('/export', 'MyController@export');
+Route::post('/import', 'MyController@import');
 
 
 //Login

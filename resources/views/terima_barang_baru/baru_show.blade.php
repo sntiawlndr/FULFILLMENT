@@ -205,7 +205,8 @@ function print_id(id){
                         $('#cetakmodal').modal('show');
                         val = data.content[0];
                         $(".cetak-detail").html(" ");
-                        body += "<tr><td>Jumlah : <td></tr>";                      
+                        body += "<tr><td>Jumlah : <td></tr>"; 
+                        body +=  "<tr><td>Cetak : <td></tr>"; 
                         // <input type="number" id="stepper1" name="stepper1" min="1" max="10" value="5" />
                         // <br /><br />
                         // <input type="button" onClick="saveValue('stepper1')" value="Submit" />                           

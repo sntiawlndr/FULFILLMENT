@@ -41,4 +41,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    static function export(){
+        $data = DB::table('fm_users')->get();
+        return $data;
+
+
+    }
+    static function import(){
+        $data = DB::table('fm_users')->get();
+        return $data;
+
+
+    }
 }

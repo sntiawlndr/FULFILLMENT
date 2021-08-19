@@ -22,7 +22,7 @@
                                             </div>
                                         </div>
                                        <br> 
-                                        <span style="float:right;"><a href="{{url('/process')}}" class="btn btn-primary" style="margin-top:-10%;">Process</a> </span>
+                                        <span style="float:right;"><a href="{{url('/proses/keluar')}}" class="btn btn-primary" style="margin-top:-10%;">Process</a> </span>
                                     <select class="selectpicker mb-2 ml-3" data-style="btn btn-outline-info">
                                         <option>Filter Status(All, Panjualan, dst.)</option>
                                         <option>All</option>
@@ -57,7 +57,7 @@
 
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="detailmodal" tabindex="-1" role="dialog" aria-labelledby="detailmodal" aria-hidden="true">
+    <div class="modal fade" id="detailmodal" tabindex="-1" role="dialog" aria-labelledby="detailmodal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,6 +105,7 @@
             "data":{'_token':$("input[name='_token']").val()}
         },
          "columns":[
+{ data: null, render: function ( data, type, row ) { return ' <label class="new-control new-checkbox checkbox-primary" style="height: 18px; margin: 0 auto;"><input type="checkbox" class="new-control-input chk" id="todoAll"><span class="new-control-indicator"></span></label>';  } },  
 {data : "out_id"},
 {data : "no_invoice"},
 {data : "seller_name"},
@@ -114,7 +115,7 @@
 { data: null, render: function ( data, type, row ) {
 
 
-    return '<a href="javascript:void(0)" class="btn btn-success" onclick="detail_id('+data['inventory_id']+')">Detail</a> ';   
+    return '<a href="{{url('/detail/keluar')}}" class="btn btn-success" />Detail</a> ';   
        } },         
         ],
 
