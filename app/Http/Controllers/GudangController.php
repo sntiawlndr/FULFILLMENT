@@ -26,15 +26,26 @@ class GudangController extends Controller
     {
 
 
-        $add = new Gudang;
-        $add->location_name = $request->get('location_name');
-        $add->location_code = $request->get('location_code');
-        $add->address_id = $request->get('address_id');
-        $add->warehouse_status = $request->get('warehouse_status');
+        
+        $adf = new Address;
+        $adf->address = $request->get('address');
+        $adf->address_telepon = $request->get('address_telepon');
+        $adf->address_city = $request->get('address_city');
+        $adf->address_districts = $request->get('address_kec');
+        $addres = $adf->save();
+        if($addres){
+            $add = new Gudang;
+            $add->address_id = $adf->address_id;
+            $add->location_name = $request->get('location_name');
+            $add->location_code = $request->get('location_code');
+            $add->warehouse_status = $request->get('warehouse_status');
+            $result = $add->save();
+        }
 
-        $result = $add->save();
+       
+       
 
-        if ($result) {
+        if ($result && $addres) {
             return json_encode(array('msg' => 'Simpan Data Berhasil', 'content' => $result, 'success' => TRUE));
         } else {
             return json_encode(array('msg' => 'Gagal Menyimpan Data', 'content' => $result, 'success' => FALSE));
@@ -57,7 +68,7 @@ class GudangController extends Controller
             $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse_location WHERE $query )jumdata, $join FROM warehouse_location WHERE $query LIMIT $start,$length ");
         } else {
 
-            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse)jumdata, $join FROM warehouse_location LIMIT $start,$length ");
+            $data['data'] = DB::SELECT("SELECT *,(select count(*) from warehouse_location)jumdata, $join FROM warehouse_location LIMIT $start,$length ");
         }
         //count total data
 
