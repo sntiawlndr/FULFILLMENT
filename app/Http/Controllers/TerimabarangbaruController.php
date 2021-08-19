@@ -79,7 +79,7 @@ class TerimabarangbaruController extends Controller
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
         $join = "(SELECT seller_name FROM fm_seller WHERE seller_id = inventory_data.seller_id) as seller_name,";
-        $join .= "(SELECT quantity FROM order_detail WHERE order_detail_id = inventory_data.order_detail_id) as quantity";
+        $join .= "(SELECT quantity FROM fm_order_detail WHERE order_detail_id = inventory_data.order_detail_id) as quantity";
        if($search){   
        
        
@@ -119,7 +119,7 @@ class TerimabarangbaruController extends Controller
    
 public function baru_print($id){
 
-$data = Barang::baru_print_by_id($id);
+$data = Terimabarangbaru::baru_print_by_id($id);
 return json_encode(array('msg'=>'Save Data Success', 'content'=>$data, 'success'=>TRUE));
 
 }

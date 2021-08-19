@@ -9,7 +9,7 @@ class Order extends Model
 {
     protected $table = "fm_order";
     protected $primaryKey='order_id';
-    protected $fillable = ['order_id','no_invoice','order_email','order_telpon','customer_name','order_status_id','creator','address_id','order_date','amount','order_status'];
+    protected $fillable = ['no_invoice','order_email','order_telpon','customer_name','order_status_id','creator','address_id','order_date','amount','order_status'];
 
 
     static function order_get_data_id_all(){

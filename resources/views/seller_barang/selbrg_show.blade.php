@@ -154,8 +154,9 @@
 
 
     let urledit = "{{URL::to('/')}}/selbrg/edit/"+data['product_id'];
-    
-    return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['product_id']+')">Detail</a> '
+    let detail = "{{URL::to('/')}}/detailselbrg/"+data['product_id'];
+
+    return '<a href="'+detail+'" class="btn btn-info" />Detail</a> '
     +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> ';    
            } },         
             ],

@@ -22,8 +22,17 @@ class Sellerbarang extends Model
         return $data;
 
     }
+    static function get_detail_id(){
+        $data = DB::table('fm_product')->get();
+        return $data;
 
+    }
+    
     static function seller_get_by_id($id){
+        $data = DB::table("fm_product")->where('product_id',$id)->get();
+        return $data;
+    }
+    static function detail_get_by_id($id){
         $data = DB::table("fm_product")->where('product_id',$id)->get();
         return $data;
     }

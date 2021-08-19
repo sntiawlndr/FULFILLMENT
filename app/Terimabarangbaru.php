@@ -9,7 +9,7 @@ class Terimabarangbaru extends Model
 {
     protected $table = "inventory_data";
     protected $primaryKey='inventory_id';
-    protected $fillable = ['product_id','order_id','seller_id','amount', 'uid'];
+    protected $fillable = ['product_id','order_id' ,'order_detail_id','quantity','seller_id','amount', 'uid'];
 
 
     static function get_data_id_all(){
@@ -38,7 +38,7 @@ class Terimabarangbaru extends Model
         return $data;
     }
 
-    static function barang_delete($id){
+    static function baru_delete($id){
     
         $delete  = DB::DELETE("DELETE FROM inventory_data where inventory_id ='".$id."' ");
         return $delete;

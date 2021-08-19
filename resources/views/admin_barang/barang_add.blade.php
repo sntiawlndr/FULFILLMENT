@@ -18,7 +18,7 @@
             <div class="form-group row mb-4">
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Seller</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select class="form-control select2" name="seller_id">
+                    <select class="form-control select2" id="seller_id" name="seller_id">
                         @foreach ($data['sellers'] as $seller)    
                         {{-- data jamak dijadikan satu  --}}
                         {{-- dibawah ini yg td diedit --}}
@@ -35,7 +35,7 @@
             <div class="form-group row mb-4">
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                    <select class="form-control select2" name="catagory_id">
+                    <select class="form-control select2" id="category_id" name="category_id">
                         {{-- data jamak dijadikan satu  --}}
                         {{-- dibawah ini yg td diedit --}}
                         @foreach ($data['categories'] as $category)
@@ -48,6 +48,7 @@
                 
                 </div>
             </div>
+
             <div class="form-group row mb-4">
                 <label for="hPassword" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Barang</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -123,8 +124,8 @@
     $("#saveButton").click(function() {
 
         formData = {
-            'seller_id': $("#seller_id").val(),
-            'category_id': $("#category_id").val(),
+            'seller_id': $("#seller_id").val(),            
+            'category_id': $("#category_id").val(),            
             'product_name': $("#product_name").val(),
             'product_sku': $("#product_sku").val(),
             'size': $(".size:checked").val(),

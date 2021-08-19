@@ -14,12 +14,12 @@
                                     </div>
                                 </div>
                                 <br>
-                                <form action="{{url('/upload/proses')}}" method="POST" enctype="multipart/form-data">
+                                {{-- <form action="{{url('/upload/proses')}}" method="POST" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Choose file</label>                                  
-                                    </div>  
+                                    </div>   --}}
                                     
                                     {{-- <div class="form-group">                                    
                                         <input type="file" class="custom-file-input"  name="file">
@@ -27,6 +27,23 @@
                                     </div>                 --}}                                
                                 
                                 </form>
+                                <br>
+                                <div class="container">
+                                    <div class="card bg-light mt-3">
+                                        <div class="card-header">
+                                            
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="{{url('import') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="file" name="file" class="form-control">
+                                                <br>
+                                                <button class="btn btn-success">Upload</button>
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">                                     

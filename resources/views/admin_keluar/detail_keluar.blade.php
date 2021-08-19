@@ -138,7 +138,7 @@
 {data : "seller_name"},
 {data : "product_name"},
 {data : "product_sku"},
-{data : "product_size"},
+{data : "size"},
 
 
 
@@ -146,7 +146,7 @@
 
 
        
-    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
+    return '<a href="{{url('keluar')}}" class="btn btn-primary"/>Batal</a> ';  
            } },         
             ],
 
