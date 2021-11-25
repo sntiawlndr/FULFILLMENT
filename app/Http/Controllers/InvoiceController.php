@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderDetail;
+use App\Barang;
+use App\InventoryOut;
+use App\InventoryReceipt;
+
 use DB;
 
 class InvoiceController extends Controller
@@ -71,5 +76,58 @@ class InvoiceController extends Controller
         return view('seller_invoice.bayar')->with('data',$data[0]);
     }
 
+    public function detail_datatable(){
+ 
+        $data=[];
+        $length = $_POST['length'];
+        $start = $_POST['start'];
+        $search = $_POST['search']['value'];
+        $join = "(SELECT product_name FROM fm_product WHERE product_id = inventory_receipt.product_id) as product_name, ";
+        $join .= "(SELECT size FROM fm_product WHERE product_id = inventory_receipt.product_id) as size ";
+      
+         if($search){   
+       
+       
+        $query = "product_id LIKE '%$search%'  OR receipt_date LIKE '%$search%'  OR total_qty LIKE '%$search%'";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from inventory_receipt WHERE $query )jumdata, $join FROM inventory_receipt WHERE $query LIMIT $start,$length ");
 
-}
+        }else{
+
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from inventory_receipt)jumdata, $join FROM inventory_receipt LIMIT $start,$length ");
+        }
+        //count total data
+   
+          $data['recordsTotal']=$data['recordsFiltered']=@$data['data'][0]->jumdata ? :0;
+   
+   
+          return $data;
+   
+       }
+
+       public function detail_data(){
+
+        $data=[];
+        $length = $_POST['length'];
+        $start = $_POST['start'];
+        $search = $_POST['search']['value'];
+        $join = "(SELECT size FROM fm_product WHERE product_id = inventory_out.product_id) as size ";
+      
+         if($search){   
+       
+       
+        $query = "product_id LIKE '%$search%'  OR product_name LIKE '%$search%'  OR date_out LIKE '%$search%'  OR quantity LIKE '%$search%'";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from inventory_out WHERE $query )jumdata, $join FROM inventory_out WHERE $query LIMIT $start,$length ");
+
+        }else{
+
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from inventory_out)jumdata, $join FROM inventory_out LIMIT $start,$length ");
+        }
+        //count total data
+   
+          $data['recordsTotal']=$data['recordsFiltered']=@$data['data'][0]->jumdata ? :0;
+   
+   
+          return $data;
+   
+       }
+    }

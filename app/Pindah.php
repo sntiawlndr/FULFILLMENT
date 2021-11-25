@@ -19,6 +19,14 @@ class Pindah extends Model
         $data = DB::table('warehouse')->get();
         return $data;
     }
+
+      static function tampil_get_data_id_all()
+    {
+        $data = DB::table('warehouse')->get();
+        return $data;
+    }
+
+
     static function pindah_get_by_id($id)
     {
         $data = DB::table("warehouse")->where('warehouse_id', $id)->get();

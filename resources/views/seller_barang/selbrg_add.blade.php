@@ -21,7 +21,7 @@
                     <select class="form-control select2" id="category_id" name="category_id">
                         {{-- data jamak dijadikan satu  --}}
                         {{-- dibawah ini yg td diedit --}}
-                        @foreach ($categories as $category)
+                        @foreach ($data as $category)
                         {{-- <option value="{{$catagories->catagory_id}}">{{$catagory->catagory_name}}</option> --}}
                         {{-- dibawah ini yg td diedit --}}
                         <option value="{{$category->category_id}}">{{$category->category_name}}</option> 

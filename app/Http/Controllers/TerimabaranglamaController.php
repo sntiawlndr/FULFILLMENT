@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Barang;
 use App\Seller;
 use App\Order;
+use App\Order_detail;
+use App\FmUser;;
 use App\Terimabaranglama;
 // use App\CategoryModel;
 use DB;
@@ -13,22 +15,34 @@ use DB;
 class TerimabaranglamaController extends Controller
 {
     function index(){
-        $data = Seller::get_data_id_all();
+        $data = FmUser::get_data_id_all();
         $data = Order::get_data_id_all();
         return view('terima_barang_baru.lama_show')->with('sellers',$data);
     }
+    
+    public function tbl_save(Request $request){
 
-    public function barang_save(Request $request){
-
-        $add = New Barang;
-        $add->seller_id= $request->get('seller_id'); 
-        $add->product_name = $request->get('product_name'); 
-        $add->product_sku = $request->get('product_sku'); 
-        $add->size = $request->get('size'); 
-        $add->product_status = $request->get('product_status'); 
+        $add = New Order_detail;
+        $add->uid= $request->get('uid');
+        $add->product_name= $request->get('product_name');
         $result = $add->save();
-
+    
         if($result){
+             return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$result, 'success'=>TRUE));
+        }else{
+             return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>$result, 'success'=>FALSE));
+        } 
+        
+    }
+    public function tbl_update(Request $request){
+        
+        $add = Order_detail::where('order_detail_id',$request->get('order_detail_id'))->firstOrFail();
+        $add->uid= $request->get('uid');
+        $add->product_name= $request->get('product_name');
+        $result = $add->save();
+        
+
+         if($result){
              return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$result, 'success'=>TRUE));
         }else{
              return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>$result, 'success'=>FALSE));
@@ -42,18 +56,16 @@ class TerimabaranglamaController extends Controller
         $length = $_POST['length'];
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
-       $join = "(SELECT seller_name FROM fm_seller WHERE seller_id = inventory_data.seller_id) as seller_name,";
-       $join .= "(SELECT amount FROM fm_order WHERE order_id = inventory_data.order_id) as amount,"; 
-       $join .= "(SELECT no_invoice FROM fm_order WHERE order_id = inventory_data.order_id) as no_invoice "; 
+       $join = "(SELECT name FROM fm_users WHERE user_id = fm_order.user_id) as name";      
        if($search){   
        
        
-        $query = "seller_name LIKE '%$search%' OR no_invoice LIKE '%$search%'";
-        $data['data'] = DB::SELECT("SELECT *,(select count(*) from inventory_data WHERE $query )jumdata, $join FROM inventory_data WHERE $query LIMIT $start,$length ");
+        $query = "(SELECT name FROM fm_users WHERE user_id = fm_order.user_id) LIKE '%$search%' OR no_invoice LIKE '%$search%' OR amount LIKE '%$search%'" ;
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_order WHERE $query )jumdata, $join FROM fm_order WHERE $query LIMIT $start,$length ");
    
        }else{
    
-        $data['data']= DB::SELECT("SELECT *,(select count(*) from inventory_data)jumdata, $join FROM inventory_data LIMIT $start,$length ");
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_order)jumdata, $join FROM fm_order LIMIT $start,$length ");
         }
        //count total data
    
@@ -63,22 +75,28 @@ class TerimabaranglamaController extends Controller
           return $data;
    
        }
+       public function tbl_invoice($order_id){      
+        $dt = Terimabaranglama::get_data_id_all();
+        $data= Terimabaranglama::edit_get_by_id($order_id);  
+        return view('terima_barang_lama.tbl')->with('ventory',$data[0])->with('dta',$dt);
+            
+        }
        public function tbl_datatable(){
 
         $data=[];
         $length = $_POST['length'];
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
-        $join = "(SELECT seller_name FROM fm_seller WHERE seller_id = inventory_data.seller_id) as seller_name";
+   
+       
        if($search){   
-       
-       
-        $query = "seller_name LIKE '%$search%' OR no_invoice LIKE '%$search%'";
-        $data['data'] = DB::SELECT("SELECT *,(select count(*) from inventory_data WHERE $query )jumdata, $join FROM inventory_data WHERE $query LIMIT $start,$length ");
+   
+        $query = "product_name LIKE '%$search%' uid LIKE '%$search%' ";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_order_detail WHERE $query )jumdata FROM fm_order_detail WHERE $query LIMIT $start,$length ");
    
        }else{
    
-        $data['data']= DB::SELECT("SELECT *,(select count(*) from inventory_data)jumdata, $join FROM inventory_data LIMIT $start,$length ");
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_order_detail)jumdata FROM fm_order_detail LIMIT $start,$length ");
         }
        //count total data
    
@@ -100,6 +118,12 @@ class TerimabaranglamaController extends Controller
         return view('terima_barang_lama.tbl')->with('data',$data);
     }
     
+    public function terima_lama($order_id){
+
+        $data['lama']= Terimabaranglama::edit_get_by_id($order_id);
+        $data['tbl']= Order_detail::orderdetail_get_by_order_id($order_id);
+        return view('terima_barang_lama.tbl')->with('data',$data);
+    }
     public function barang_get($id){
 
         $data = Barang::barang_get_by_id($id);
@@ -137,6 +161,16 @@ public function import_data(Request $request)
 		// alihkan halaman kembali
 		return redirect('/upload');
 	}
+    public function tbl_cek($id){
 
+        $data = Terimabaranglama::tbl_data_id();
+        return view('terima_barang_lama.tbl')->with('data',$data);
+        //  $data = Barang::barang_get_by_id($id);
+        // $join = "(SELECT category_name FROM fm_category WHERE category_id = fm_product.category_id) as category_name,";
+        // $join .= "(SELECT seller_name FROM fm_seller WHERE seller_id = fm_product.seller_id) as seller_name "; 
+        // $data= DB::SELECT("SELECT *, $join FROM fm_product WHERE product_id = $id");
+        // return json_encode(array('msg'=>'Save Data Success', 'content'=>$data, 'success'=>TRUE));
+    
+    }
 
 }

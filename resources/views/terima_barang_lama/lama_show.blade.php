@@ -5,7 +5,7 @@
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                         <h4>Daftar Terima Barang</h4>
+                                         <h4>Daftar Terima Barang Lama</h4>
                                         </div>                 
                                     </div>
                                 </div>
@@ -108,12 +108,15 @@
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },
-         "columns":[
-{data : "inventory_id"},
+         "columns":[ { "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
 {data : "no_invoice"},
-{data : "seller_name"},
+{data : "name"},
 {data : "amount"},
-{data : "asal"},
+{data : "type"},
 
 
 { data: null, render: function ( data, type, row ) {
@@ -121,7 +124,9 @@
 
     // let urledit = "{{URL::to('/')}}/tbl/show"+data['in'];
     
-    return '<a href="{{url('/tbl/show')}}" class="btn btn-primary"/>Terima Barangs</a> ';   
+     let urledit = "{{URL::to('/')}}/terima/lama/"+data['order_id'];
+    
+    return '<a href="'+urledit+'" class="btn btn-primary"/>Terima Barang</a>';  
            } },         
             ],
 

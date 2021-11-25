@@ -46,6 +46,8 @@
     </script>
 
 <script src="{{asset('assets/js/select2_modified.js')}}"></script>
+{{-- generate --}}
+<script src="{{asset('assets/js/JsBarcode-master/dist/JsBarcode.all.js')}}"></script>
 
     
         

@@ -45,17 +45,31 @@ class FmUserController extends Controller
         $length = $_POST['length'];
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
-        $join = "(SELECT group_name FROM fm_group_role WHERE group_role_id = fm_users.group_role_id) as group_name, ";
+        $join = "(SELECT group_name FROM fm_group_role WHERE group_role_id = fm_users.group_role) as group_name ";
         // $join .= "(SELECT seller_name FROM fm_seller WHERE seller_id = fm_users.seller_id) as seller_name ";
 
-       if($search){   
+        if($search){  
+            $filters = "";
+            if(!empty($_POST['status'])){
+    
+                $filters = "fm_users.user_status ='".$_POST['status']."' && ";
+                
+               }  
+    
    
-        $query = "name LIKE '%$search%' OR email LIKE '%$search%' ";
-        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_users WHERE $query )jumdata FROM fm_users WHERE $query LIMIT $start,$length ");
+        $query = "$filters (name LIKE '%$search%' OR email LIKE '%$search%') ";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_users WHERE $query )jumdata, $join FROM fm_users WHERE $query LIMIT $start,$length ");
    
-       }else{
+    }else{
+        $filters = "";
+        if(!empty($_POST['status'])){
+
+            $filters = "WHERE fm_users.user_status ='".$_POST['status']."'";
+            
+           }
+    
    
-        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_users)jumdata FROM fm_users LIMIT $start,$length ");
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_users)jumdata, $join FROM fm_users  $filters LIMIT $start,$length ");
         }
        //count total data
    
@@ -89,6 +103,7 @@ class FmUserController extends Controller
         
         $add->password = Hash::make($pw) ;
         $add->group_role = $request->get('group_role'); 
+        $add->user_status = $request->get('user_status');
         $result = $add->save();
 
         if($result){
@@ -101,19 +116,20 @@ class FmUserController extends Controller
 
     
 
-    // public function barang_edit($user_id){
-    //     $data['barang'] = Barang::barang_get_by_id($user_id)[0];
-    //     $data['sellers'] = Seller::get_data_id_all();       
-    //     return view('admin_barang.barang_edit')->with('data',$data);
-    // }
+    public function user_edit($user_id){
+        $data['users'] = FmUser:: user_get_by_id($user_id)[0];
+        $data['roles2'] =  Role::get_data_id_all(); 
+        $data['roles'] = Role::role_get_by_id($data['users']->group_role)[0];       
+        return view('admin_user.user_edit')->with('data',$data);
+    }
 
      public function user_update(Request $request){
-        $add = FmUser::where('product_id',$request->get('product_id'))->firstOrFail();
-        $add->user_id = $request->get('user_id'); 
+        $add = FmUser::where('user_id',$request->get('user_id'))->firstOrFail();
         $add->name = $request->get('name'); 
         $add->email = $request->get('email'); 
         $add->user_telepon = $request->get('user_telepon'); 
         $add->group_role = $request->get('group_role');
+        $add->user_status = $request->get('user_status');
         $result = $add->save();
 
          if($result){

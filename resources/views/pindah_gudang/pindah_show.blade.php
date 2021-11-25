@@ -107,11 +107,9 @@
                                         '_token': $("input[name='_token']").val()
                                     }
                                 },
-                                "columns": [{ "data": null,"sortable": false, 
-       render: function (data, type, row, meta) {
-                 return meta.row + meta.settings._iDisplayStart + 1;
-                }  
-    },
+                                "columns": [{
+                                        data: "warehouse_id"
+                                    },
                                     {
                                         data: "warehouse_date"
                                     },

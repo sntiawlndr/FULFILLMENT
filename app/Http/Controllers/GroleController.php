@@ -37,29 +37,41 @@ class GroleController extends Controller
 
     public function grole_datatable(){
 
-     $data=[];
-     $length = $_POST['length'];
-     $start = $_POST['start'];
-     $search = $_POST['search']['value'];
-
-    
-    if($search){   
-
-     $query = "group_name LIKE '%$search%' ";
-     $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_group_role WHERE $query )jumdata FROM fm_group_role WHERE $query LIMIT $start,$length ");
-
-    }else{
-
-     $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_group_role)jumdata FROM fm_group_role LIMIT $start,$length ");
-     }
-    //count total data
-
-       $data['recordsTotal']=$data['recordsFiltered']=@$data['data'][0]->jumdata ? :0;
-
-
-       return $data;
-
-    }
+        $data=[];
+        $length = $_POST['length'];
+        $start = $_POST['start'];
+        $search = $_POST['search']['value'];
+   
+       
+       if($search){   
+           $filters = "";
+           if(!empty($_POST['group_status'])){
+   
+               $filters = "fm_group_role.group_status ='".$_POST['group_status']."' && ";
+               
+              }
+   
+        $query = "$filters (group_name LIKE '%$search%' OR group_status LIKE '%$search%') ";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_group_role WHERE $query )jumdata FROM fm_group_role WHERE $query LIMIT $start,$length ");
+   
+       }else{
+           $filters = "";
+           if(!empty($_POST['group_status'])){
+   
+               $filters = "WHERE fm_group_role.group_status ='".$_POST['group_status']."'";
+               
+              }
+   
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_group_role)jumdata FROM fm_group_role $filters LIMIT $start,$length ");
+        }
+       //count total data
+   
+          $data['recordsTotal']=$data['recordsFiltered']=@$data['data'][0]->jumdata ? :0;
+   
+   
+          return $data;
+   
+       }
 
     public function grole_show(){
 

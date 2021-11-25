@@ -34,7 +34,7 @@
                 <div class="form-group row mb-4">
                     <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gudang Tujuan</label>
                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                        <input type="text" class="form-control" id="address" placeholder="" name="address" value="{{$data['pindah']->destination}}">
+                        <input type="text" class="form-control" id="destination" placeholder="" name="destination" value="{{$data['pindah']->destination}}">
                         <input type="hidden" class="form-control" name="warehouse_id" id="warehouse_id" placeholder="" value="{{$data['pindah']->warehouse_id}}">
 
                     </div>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,10 +23,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard_seller');
     }
-    public function dashboard()
+   
+
+    public function adminHome()
     {
-        return view('dashboard');
+        return view('dashboard_admin');
     }
+    public function logout(){
+        Auth::logout();
+        return redirect('/login'); // ini untuk redirect setelah logout
+    }
+    
 }

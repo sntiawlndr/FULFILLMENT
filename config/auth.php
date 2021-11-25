@@ -46,6 +46,17 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'fm_seller',
+        ],
+
+        'seller-api' => [
+            'driver' => 'token',
+            'provider' => 'fm_seller',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +80,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'fm_seller' => [
+            'driver' => 'eloquent',
+            'model' => App\Seller::class,
         ],
 
         // 'users' => [

@@ -9,7 +9,7 @@ class Order extends Model
 {
     protected $table = "fm_order";
     protected $primaryKey='order_id';
-    protected $fillable = ['no_invoice','order_email','order_telpon','customer_name','order_status_id','creator','address_id','order_date','amount','order_status'];
+    protected $fillable = ['order_id','no_invoice','order_email','order_telpon','customer_name','order_status_id','creator','address_id','order_date','status','amount','order_status'];
 
 
     static function order_get_data_id_all(){
@@ -32,6 +32,15 @@ class Order extends Model
         $data = DB::table('fm_order')->get();
         return $data;
 
+    }
+    static function invbor_get_by_userid($user_id){
+        $data = DB::table("fm_order")->where('user_id',$user_id)->get();
+        return $data;
+    }
+
+    static function order_by_order_id($order_id){
+        $data = DB::table("fm_order")->where('order_id',$order_id)->get();
+        return $data;
     }
 
 }

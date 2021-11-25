@@ -86,7 +86,7 @@
                 <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"> Status</label>
                 <div class="col-xl-10 col-lg-9 col-sm-10">
 
-                    <select id="group_status" class="form-control" name="group_status">
+                    <select id="user_status" class="form-control" name="user_status">
 
                         <option if="" ($status="=" 1="" )="" echo="" 'selected'="" ;="" ?="">Enable</option>
 
@@ -131,6 +131,7 @@
             'user_telepon': $("#user_telepon").val(),
             'password': $("#password").val(),
             'group_role': $("#group_role").val(),
+            'user_status': $("#user_status").val(),
             //kurang status dan gudang
             '_token': $("input[name='_token']").val()
         }

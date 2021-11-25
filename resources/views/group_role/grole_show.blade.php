@@ -12,6 +12,13 @@
                                     </div>
                                 </div>
                                 <div class="widget-content widget-content-area">
+                                    <span style="float: right;">
+                                        <select id='status2' class="form-control" style="width: 200px">
+                                            <option value="">--Select Status--</option>
+                                            <option value="enable">Enable</option>
+                                            <option value="disable">Disable</option>
+                                        </select>
+                                        </span>
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
                                             <thead>
@@ -158,6 +165,17 @@
 @endsection('content');
 @push('jsfooter')
 <script type="text/javascript">
+var ss = $(".select2").select2({
+        tags: true,
+    });
+
+    $('#status2').change(function(){
+    var group_status = $(this).val()
+    if(group_status !== ""){
+     load_data();
+    }
+     
+    })
 
     $(document).ready(function(){
         load_data();
@@ -172,7 +190,7 @@
         "ajax": {
             "url": "{{url('/grole/datatable')}}",
             "type": "POST",
-            "data":{'_token':$("input[name='_token']").val()}
+            "data":{'_token':$("input[name='_token']").val(),'group_status':$('#status2 :selected').val()}
         },
          "columns":[ { "data": null,"sortable": false, 
        render: function (data, type, row, meta) {

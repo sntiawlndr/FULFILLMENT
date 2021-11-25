@@ -14,23 +14,37 @@
                                 <br>
                                 <div class="widget-content widget-content-area">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped mb-4" id="zero-config">
+                                        <table class="table table-bordered table-striped mb-4">
                                             <thead>
-                                                <tr>
+                                                <tr>     
                                                     <th>No</th>
-                                                    <th>Seller</th>
                                                     <th>Nama Barang</th>
                                                     <th>SKU</th>
                                                     <th>Ukuran</th>
                                                     <th>Jumlah</th>
                                                     <th>Lokasi</th>
-                                                    <th>Action</th>
+                                                 
 
                                                 </tr>
                                                 
                                             </thead>
-                                            <tbody>
+                                            {{-- <tbody>
+                                                <tbody>
+                                                    @foreach ($proses as $item)
+                                                        
+                                                    <tr>
+                                                    <td><input type="text" value="{{$item->product_id}}"></td>                               
+                                                    <td><input type="text" value="{{$item->product_name}}"></td>
+                                                    <td><input type="text" value="{{$item->product_sku}}"></td>
+                                                    <td><input type="text" value="{{$item->size}}"></td>
+                                                    <td><input type="text" value="{{$item->amount}}"></td>
+                                                    <td><input type="text" value="{{$item->location_name}}"></td>
+                                                    </tr>
+                                                    @endforeach
+                                            </tbody> --}}
+                                                
                                         </table>
+                                        <input type="hidden" class="form-control" id="checkk" value="">
                                         <div class="form-group row">
                                             <button href = "{{url('/')}}" type="button" class="btn btn-primary" data-dismiss="modal">Proses</button>
                                         </div>
@@ -104,55 +118,103 @@
 @endsection('content');
 @push('jsfooter')
 <script type="text/javascript">
+//  $(document).ready(function(){
+//      var mytable = $("#todoAll").DataTable({
+//     ajax: 'data.json',
+//     columnDefs: {
+//     { targets: 0
+//     checkbox:{ 
+//         selectRow: true
+//     }
+// }
+// },
+// select:{
+//     style:'multi'
+// },
+// order: [[1, 'asc']]
+//      })
+//  $("#todoAll").on('submit', function(e){
+//      var form = this
+//      var rowsel = mytable.column(0).checkboxes.selected();
+//  $.each(rowsel, function(index,rowId){
+//      $(form).append(
+//          $('<input>').attr('type','hidden').attr('name','id[]').val(rowId)
+//      )
+// })
+// $("#view-rows").text(rowsel.join(","))
+// $("#view-form").text($(form).serialize())
+// $('input[name="id[\]"]', form).remove()
+// e.preventDefault()
+//  })
+//  });
 
-    $(document).ready(function(){
-        load_data();
-    })
-
-    function load_data(){
-        $('#zero-config').DataTable().destroy();
-        $('#zero-config').DataTable( {
-         "processing": true,
-        "serverSide": true,
-        "ajax": {
-            "url": "{{url('/proses/keluar/datatable')}}",
-            "type": "POST",
-            "data":{'_token':$("input[name='_token']").val()}
-        },
-         "columns":[
-{data : "out_id"},
-{data : "seller_name"},
-{data : "product_name"},
-{data : "product_sku"},
-{data : "size"},
-{data : "amount"},
-{data : "location_name"},
+// $(document).ready(function () {
+//    $('body').on('click', '#todoAll', function () {
+//       if ($(this).hasClass('allChecked')) {
+//          $('input[type="checkbox"]', '#todoAll').prop('checked', false);
+//       } else {
+//        $('input[type="checkbox"]', '#todoAll').prop('checked', true);
+//        }
+//        $(this).toggleClass('allChecked');
+//      })
+// });
 
 
+//  $(document).ready(function(){
+//         load_data();
+//     })
+//     $(function(){
+//       $('#todoAll').click(function(){
+//         var val = [];
+//         $(':checkbox:checked').each(function(i){
+//           val[i] = $(this).val();
+//         });
+//       });
+//     });
+    
+    
 
-{ data: null, render: function ( data, type, row ) {
+//     function load_data(){
+//         $('#zero-config').DataTable().destroy();
+//         $('#zero-config').DataTable( {
+//          "processing": true,
+//         "serverSide": true,
+//         "ajax": {
+//             "url": "{{url('/proses/keluar/datatable')}}",
+//             "type": "POST",
+//             "data":{'_token':$("input[name='_token']").val(),'checked':$("#checkk").val()}
+//             // "data":{'_token':$("input[name='_token']").val(),':checkbox:checked':$("#todoAll").val()}
+            
+            
+//         },
+//          "columns":[
+// {data : "out_id"},
+// {data : "product_name"},
+// {data : "product_sku"},
+// {data : "size"},
+// {data : "amount"},
+// {data : "location_name"},
 
 
-       
-    return '<a href="{{url('baru')}}" class="btn btn-primary"/>Batal</a> ';  
-           } },         
-            ],
 
-            "oLanguage": {
+         
+//             ],
+
+//             "oLanguage": {
                 
-         "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-                "sInfo": "Showing page PAGE of PAGES",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-               "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [5, 10, 20, 50,100,500,1000],
-            "pageLength": 5 
+//          "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+//                 "sInfo": "Showing page PAGE of PAGES",
+//                 "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+//                 "sSearchPlaceholder": "Search...",
+//                "sLengthMenu": "Results :  _MENU_",
+//             },
+//             "stripeClasses": [],
+//             "lengthMenu": [5, 10, 20, 50,100,500,1000],
+//             "pageLength": 5 
             
 
-        });
-    }
+//         });
+//     }
 
 function delete_id(id){
     var ask = ("Are Sure?");

@@ -9,29 +9,23 @@
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                          <h4>Upload CSV
-                                            <a href="{{url('/barang')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>                                            
+                                            <a href="{{url('/selbrg/')}}" class="btn btn-dark" style="float:right;margin-top: -1%;color:#fff;">Kembali</a>                                            
                                          </h4>
                                         </div>                 
                                     </div>
                                 </div>
                                 <br>
-                                <form action="{{url('/upload/proses')}}" method="POST" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>                                  
-                                    </div>  
-                                    
-                                    {{-- <div class="form-group">                                    
-                                        <input type="file" class="custom-file-input"  name="file">
-                                        <input type="submit" value="Upload" class="btn btn-primary">
-                                    </div>                 --}}                                
-                                
-                                </form>
+                                <div class="card-body">
+                                    <form style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 10px;" action="{{ route('selbrgImport') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <input type="file" name="import_file" />
+                                        <button class="btn btn-primary">Import File</button>
+                                    </form>
+                                </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">                                     
-                                        <a href="{{url('/barang/cek')}}" class="btn btn-primary" style="float:right;margin-top: -1%;color:#fff;">Cek</a>                                           
+                                        <a href="{{url('selbrgImport')}}" class="btn btn-primary" style="float:right;margin-top: -1%;color:#fff;">Cek</a>                                           
                                     </div> 
                                 </div>
                                           
@@ -104,7 +98,7 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/barang/datatable')}}",
+            "url": "{{url('/selbrg/datatable')}}",
             "type": "POST",
             "data":{'_token':$("input[name='_token']").val()}
         },

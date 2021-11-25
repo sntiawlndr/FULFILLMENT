@@ -27,7 +27,7 @@
                                         <option>Disabled</option>
                                     </select>  
                                                                     
-                               
+                                </form>
                                 <br>
                                 <span style="float:right;"><a href="{{url('/seller/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
                                 <br>
@@ -108,18 +108,18 @@
 {data : "seller_email"},
 {data : "seller_telpon"},
 {data : "seller_name"},
-{data : "group_role"},
+{data : "group_name"},
 
 
 { data: null, render: function ( data, type, row ) {
 
 
     let urledit = "{{URL::to('/')}}/seller/edit/"+data['seller_id'];
-    
+    let urleditpw = "{{URL::to('/')}}/seller/gantipw/"+data['seller_id'];
     return '<a href="javascript:void(0)" class="btn btn-info" onclick="detail_id('+data['seller_id']+')">Detail</a> '
     +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> '
     +"<a href='javascript:void(0)' onclick='delete_id("+data['seller_id']+")' class='btn btn-danger'>Delete</a>"
-    +'<a href="{{url('/ganti/show')}}" class="btn btn-success"/>Ganti Password</a> ';    
+    +'<a href="'+urleditpw+'" class="btn btn-success"/>Ganti Password</a> ' ;
            } },         
             ],
 
@@ -140,9 +140,7 @@
     }
 
 function delete_id(id){
-
-    var ask = confirm("Apakah Anda Yakin?");
-
+    var ask = confirm ("Apakah anda yakin?");
     if(ask){
     
   
@@ -181,7 +179,7 @@ function detail_id(id){
 body += "<tr><td>E-Mail: <td><td>"+val.seller_email+"<td></tr>";
 body += "<tr><td>No HP: <td><td>"+val.seller_telpon+"<td></tr>";
 body += "<tr><td>Nama Seller: <td><td>"+val.seller_name+"<td></tr>";
-body += "<tr><td>Group : <td><td>"+val.group_role+"<td></tr>";   
+body += "<tr><td>Group : <td><td>"+val.seller_group_id+"<td></tr>";   
     $(".list-detail").html(body);
                     }else{
                         alert("Seller Detail Tidak Ditemukan") ;

@@ -17,8 +17,8 @@
                                     <div class="form-group row mb-4">                            
                                             <label for="e_mail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">E-mail</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                                <input type="email" class="form-control" id="seller_email" placeholder="" name="seller_email"  value="{{$seller->seller_email}}" required>
-                                                <input type="hidden" class="form-control" id="seller_id" placeholder=""  value="{{$seller->seller_id}}">
+                                                <input type="email" class="form-control" id="seller_email" placeholder="" name="seller_email"  value="{{$data['seller']->seller_email}}" required>
+                                                <input type="hidden" class="form-control" id="seller_id" placeholder=""  value="{{$data['seller']->seller_id}}">
                                                 @csrf
                                             </div>
                                         </div>
@@ -26,14 +26,14 @@
                                         <div class="form-group row mb-4">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">No. HP</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                                <input type="text" class="form-control" id="seller_telpon" placeholder="" name="seller_telpon" value="{{$seller->seller_telpon}}">
+                                                <input type="text" class="form-control" id="seller_telpon" placeholder="" name="seller_telpon" value="{{$data['seller']->seller_telpon}}">
                                             </div>
                                         </div>
 
                                         <div class="form-group row mb-4">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                                <input type="text" class="form-control" id="seller_name" placeholder="" name="seller_name" value="{{$seller->seller_name}}">
+                                                <input type="text" class="form-control" id="seller_name" placeholder="" name="seller_name" value="{{$data['seller']->seller_name}}">
                                                 
                                             </div>
                                         </div>
@@ -41,8 +41,9 @@
                                         <div class="form-group row mb-4">
                                             <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label" >Group</label>
                                             <div class="col-xl-10 col-lg-9 col-sm-10">
-                                                <input type="text" class="form-control" id="group_role" placeholder="" name="group_role" value="{{$seller->group_role}}">
-                                                
+                                            <select id="seller_group_id" class="form-control Test1" name="seller_group_id">   
+                                            </select>
+                                                <input type="hidden" class="form-control" id="seller_id" placeholder=""  value="{{$data['seller']->seller_id}}">
                                             </div>
                                         </div>
 
@@ -60,6 +61,12 @@
 
     @push('jsfooter')
     <script type="text/javascript">
+     var ss = $("#seller_group_id").select2({
+        tags: true
+    });
+
+    $(".test1").select2_modified({url:"{{url('/select2/get-raw')}}",token:$("input[name='_token']").val(),label:'pilih tipe',field:'seller_group',id:'seller_group_id',name:'group_name',value:{id:"{{$data['seller']->seller_group_id}}",text:"{{$data['groupsellers']->group_name}}"}});
+     
      $("#saveButton").click(function(){
    
     formData = {
@@ -67,7 +74,7 @@
         'seller_email':$("#seller_email").val(),
         'seller_telpon':$("#seller_telpon").val(),
         'seller_name':$("#seller_name").val(),
-        'group_role':$("#group_role").val(),
+        'seller_group_id':$("#seller_group_id").val(),
         '_token':$("input[name='_token']").val()
     }
 
@@ -89,6 +96,7 @@
                 }
            });
 });
+
     </script>
     @endpush
             

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.app_seller')
 @section('content')
 <div id="tableStriped" class="col-lg-12 col-12 layout-spacing">
                             <div class="statbox widget box box-shadow">
@@ -20,28 +20,39 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <label>Seller</label>            
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-primary">
-                                        <option>Semua(Select2)</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                        <option>Onions</option>
-                                    </select>
-                                    
-                                    <label>Ukuran</label>
-                                    <select class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
-                                        <option>Semua</option>
-                                        <option>S</option>
-                                        <option>M</option>
-                                        <option>L</option>
-                                        <option>XL</option>
-                                    </select>         
+                                     
+                                    <div class="form-group col-md-4">
+                                    <label for="filter-satuan">Ukuran</label>
+                                    <select class="form-control select2" style="width: 200px" data-style="btn btn-outline-primary" id="ukuran2">
+                                        <option value="">--Semua--</option>
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                         <option value="l">L</option>
+                                          <option value="xl">XL</option>
+
+                                        
+                                    </select>  
+                                  </div>
+                                  <div>
+                                  <svg id ="barcode"></svg>                           
+                        
+                                  </div>
+ 
                                 
-                                <span style="float:right;"><a href="{{url('/barang/filter')}}" class="btn btn-primary" style="margin-top:-10%;">Filter</a> </span>                                
+                                    {{-- form filter --}}
+                                    
+                                    <span style="float: right;">
+                                    <select id='status2' class="form-control" style="width: 200px">
+                                        <option value="">--Select Status--</option>
+                                        <option value="enable">Enable</option>
+                                        <option value="disable">Disable</option>
+                                    </select>
+                                    </span>
+
+                                                              
                                 </form>
-                                <br>
-                                <span style="float:right;"><a href="{{url('/selbrg/upload')}}" class="btn btn-primary" style="margin-top:-10%;">Import CSV</a> </span>
-                                <span style="float:right;"><a href="{{url('/selbrg/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span>
+                                <span style="float:right;"><a href="{{url('/selbrg/upload')}}" class="btn btn-info" style="margin-top:-10% height:5%;">Import CSV</a> </span>
+                                <span style="float:right;"><a href="{{url('/selbrg/add')}}" class="btn btn-primary" style="margin-top:-10% height:5%;">Tambah</a> </span>
                                 <br>
                                 <br>
                                 <div class="widget-content widget-content-area">
@@ -50,10 +61,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Kategori</th>
                                                     <th>Nama Barang</th>
                                                     <th>SKU</th>
                                                     <th>Ukuran</th>
+                                                    <th>Status</th>
                                                     <th class="text-center" width="35%">Action</th>
                                                 </tr>
                                             </thead>
@@ -127,6 +138,28 @@
 @push('jsfooter')
 <script type="text/javascript">
 
+    $('#status2').change(function(){
+    var status = $(this).val()
+    if(status !== ""){
+     load_data();
+    }
+     
+    })
+      $('#seller2').change(function(){
+    var seller = $(this).val()
+    if(seller !== ""){
+     load_data();
+    }
+     
+    })
+      $('#ukuran2').change(function(){
+    var ukuran = $(this).val()
+    if(ukuran !== ""){
+     load_data();
+    }
+     
+    })
+    
     $(document).ready(function(){
         
         load_data();
@@ -138,25 +171,28 @@
          "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "{{url('/selbrg/datatable')}}",
+            "url": "{{url('/selbrg/datatable')}}",      
             "type": "POST",
-            "data":{'_token':$("input[name='_token']").val()}
+            "data":{'_token':$("input[name='_token']").val(),'status':$('#status2 :selected').val(),'seller':$('#seller2 :selected').val(),'ukuran':$('#ukuran2 :selected').val()}
         },
-         "columns":[
-{data : "product_id"},
-{data : "category_name"},
+        "columns":[ { "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
 {data : "product_name"},
 {data : "product_sku"},
 {data : "size"},
+{data : "product_status"},
 
 
 { data: null, render: function ( data, type, row ) {
 
 
-    let urledit = "{{URL::to('/')}}/selbrg/edit/"+data['product_id'];
-    let detail = "{{URL::to('/')}}/detailselbrg/"+data['product_id'];
+let urledit = "{{URL::to('/')}}/selbrg/edit/"+data['product_id'];
+let urldet = "{{URL::to('/')}}/selbrgdetail/"+data['product_id'];
 
-    return '<a href="'+detail+'" class="btn btn-info" />Detail</a> '
+    return '<a href="'+urldet+'" class="btn btn-info" />Detail</a> '
     +'<a href="'+urledit+'" class="btn btn-primary"/>Edit</a> ';    
            } },         
             ],

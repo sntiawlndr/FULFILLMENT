@@ -16,29 +16,13 @@
         </div>
         <div class="widget-content widget-content-area">
             <form>
-                <div class="form-group row mb-4">
-
-                    <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label"></label>
-                    <div class="col-xl-10 col-lg-9 col-sm-10">
-                        <input type="hidden" class="form-control" id="seller_id" placeholder="" name="seller_id" value="{{$data['sellers']->seller_id}}">
-
-                        {{-- <input type="text" class="form-control" id="seller_id" placeholder="" name="seller_id" value="{{$barang->seller_id}}"> --}}
-                        <input type="hidden" class="form-control" name="product_id" id="product_id" placeholder=""
-                            value="{{$data['barang']->product_id}}">
-                        @csrf
-                    </div>
-                </div>
+               
                 <div class="form-group row mb-4">
                     <label for="hEmail" class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kategori</label>
                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                        <select id="category_id" class="form-control select2" name="catagory_id">
+                        <select id="category_id" class="form-control test2" name="catagory_id">
                           
-                            @foreach ($data['categories'] as $category)
-                           
-                           
-                            <option value="{{$category->category_id}}">{{$category->category_name}}</option> 
-    
-                            @endforeach
+                          
                         </select>
                     
                     </div>
@@ -103,50 +87,54 @@
 
 @push('jsfooter')
 <script type="text/javascript">
-var ss = $(".select2").select2({
-        tags: true
-    });
-
-    $(".size").each(function () {
-        if ($(this).val() == "{{$data['barang']->size}}"){
-            $(this).attr("checked", "true");
-
-        }
-    })
-    $("#product_status").val("{{$data['barang']->product_status}}");
-
-
-    $("#saveButton").click(function () {
-
-        formData = {
-            'product_id': $("#product_id").val(),
-            'category_id': $("#category_id").val(),
-            'product_name': $("#product_name").val(),
-            'product_sku': $("#product_sku").val(),
-            'size': $(".size:checked").val(),
-            'product_status': $("#product_status").val(),
-            '_token': $("input[name='_token']").val()
-        }
-
-
-        $.ajax({
-            url: "{{url('/selbrg/update')}}",
-            method: 'POST',
-            data: formData,
-            cache: false,
-            success: function (response) {
-                response = JSON.parse(response);
-                if (response.success == true) {
-                    alert('Simpan Data Berhasil');
-                    location.reload();
-                } else {
-                    alert("Gagal Menyimpan Data");
-                }
-            },
-            error: function (error) {
-                alert("Terjadi Kesalahan");
-            }
+    var ss = $(".select2").select2({
+            tags: true
         });
-    });
-</script>
-@endpush
+
+        $(".test2").select2_modified({url:"{{url('/select2/get-raw')}}",token:$("input[name='_token']").val(),label:'pilih tipe',field:'fm_category',id:'category_id',name:'category_name',value:{id:"{{$data['barang']->category_id}}",text:"{{$data['categories']->category_name}}"}});
+
+
+    
+        $(".size").each(function () {
+            if ($(this).val() == "{{$data['barang']->size}}"){
+                $(this).attr("checked", "true");
+    
+            }
+        })
+        $("#product_status").val("{{$data['barang']->product_status}}");
+    
+    
+        $("#saveButton").click(function () {
+    
+            formData = {
+                'product_id': $("#product_id").val(),
+                'category_id': $("#category_id").val(),
+                'product_name': $("#product_name").val(),
+                'product_sku': $("#product_sku").val(),
+                'size': $(".size:checked").val(),
+                'product_status': $("#product_status").val(),
+                '_token': $("input[name='_token']").val()
+            }
+    
+    
+            $.ajax({
+                url: "{{url('/selbrg/update')}}",
+                method: 'POST',
+                data: formData,
+                cache: false,
+                success: function (response) {
+                    response = JSON.parse(response);
+                    if (response.success == true) {
+                        alert('Simpan Data Berhasil');
+                        location.reload();
+                    } else {
+                        alert("Gagal Menyimpan Data");
+                    }
+                },
+                error: function (error) {
+                    alert("Terjadi Kesalahan");
+                }
+            });
+        });
+    </script>
+    @endpush

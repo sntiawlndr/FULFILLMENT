@@ -17,7 +17,7 @@
                                         {{-- @foreach ($data['tbbs'] as $tbb) --}}
                                         <div class="col-xl-10 col-lg-9 col-sm-10">
                                             <input type="text" class = "form-control" name="no_invoice" autocomplete="off" readonly= "" 
-                                                id="no_invoice" >
+                                                id="no_invoice" value="{{$data->uid}}" >
                                         </div>
                                         {{-- value="{{$tbb->no_invoice}}" --}}
                                         {{-- @endforeach --}}
@@ -42,6 +42,10 @@
                                             <tbody>
                                         </table>
                                     </div>
+                                    <input type="hidden" class="form-control" id="seller_id" value="{{$data}}">
+                                </div>
+                                    </div>
+                                    
                                 </div>
                                 </div>
                             </div>
@@ -113,13 +117,7 @@
 
  
     $(document).ready(function(){
-//     var table = $('#tabel-data').DataTable( {
-//     scrollY: "300px",
-//     scrollX: true,
-//     scrollCollapse: true
- 
-// } );
-// } );
+
         load_data();
     })
 
@@ -131,12 +129,15 @@
         "ajax": {
             "url": "{{url('/detail/keluar/datatable')}}",
             "type": "POST",
-            "data":{'_token':$("input[name='_token']").val()}
+            "data":{'_token':$("input[name='_token']").val(),'seller_id':$("#seller_id").val()}
+
         },
-         "columns":[
-{data : "out_id"},
+         "columns":[ { "data": null,"sortable": false, 
+       render: function (data, type, row, meta) {
+                 return meta.row + meta.settings._iDisplayStart + 1;
+                }  
+    },
 {data : "seller_name"},
-{data : "product_name"},
 {data : "product_sku"},
 {data : "size"},
 

@@ -7,9 +7,16 @@
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                          <h4>User Show
                                             <span style="float:right;"><a href="{{url('/user/add')}}" class="btn btn-primary" style="margin-top:-10%;">Tambah</a> </span></h4>
-                                        </div>                 
+                                       
+                                        </div> 
+                                        <select id="status2" class="selectpicker mb-4 ml-3" data-style="btn btn-outline-info">
+                                            <option value="">--Show All--</option>
+                                            <option value="Enable">Enable</option>
+                                            <option value="Disable">Disable</option>
+                                        </select>                
                                     </div>
                                 </div>
+                            
                                 <div class="widget-content widget-content-area">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped mb-4" id="zero-config">
@@ -20,6 +27,7 @@
                                                     <th>No. HP</th>
                                                     <th>Nama</th>
                                                     <th>Role</th>
+                                                    <th>Status</th>
                                                     
                                                     <th class="text-center" width="35%">Action</th>
                                                 </tr>
@@ -66,6 +74,14 @@
 @endsection('content');
 @push('jsfooter')
 <script type="text/javascript">
+   $('#status2').change(function () {
+                            var status = $(this).val()
+                            if (status !== "") {
+                                load_data();
+                            }
+
+                        })
+
 
     $(document).ready(function(){
         load_data();
@@ -79,7 +95,7 @@
         "ajax": {
             "url": "{{url('/user/datatable')}}",
             "type": "POST",
-            "data":{'_token':$("input[name='_token']").val()}
+            "data":{'_token':$("input[name='_token']").val(),'status': $('#status2 :selected').val()}
         },
          "columns":[ { "data": null,"sortable": false, 
        render: function (data, type, row, meta) {
@@ -90,7 +106,8 @@
 {data : "email"},
 {data : "user_telepon"},
 {data : "name"},
-{data : "group_role"},
+{data : "group_name"},
+{data : "user_status"},
 
 
 { data: null, render: function ( data, type, row ) {

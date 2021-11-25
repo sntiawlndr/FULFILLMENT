@@ -12,7 +12,7 @@ class Detail extends Model
     protected $fillable = ['warehouse_detail_id', 'warehouse_id', 'uid', 'product_id', 'product_name', 'product_model', 'quantity', 'warehouse_code'];
 
 
-    static function pindah_get_data_id_all()
+    static function get_data_id_all()
     {
         $data = DB::table('warehouse_detail')->get();
         return $data;

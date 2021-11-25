@@ -8,7 +8,7 @@ class Seller extends Model
 {
     protected $table = "fm_seller";
     protected $primaryKey='seller_id';
-    protected $fillable = ['seller_email','seller_name','seller_telpon','group_role','address_id','seller_status'];
+    protected $fillable = ['seller_email','seller_name','seller_telpon','group_role','address_id','seller_status','seller_password','seller_group_id','address_postal_code'];
 
 
 
@@ -26,6 +26,7 @@ class Seller extends Model
 
     static function seller_get_by_id($id){
         $data = DB::table("fm_seller")->where('seller_id',$id)->get();
+
         return $data;
 
 
@@ -41,4 +42,7 @@ class Seller extends Model
         return $data;
 
     }
+
+
+    
 }

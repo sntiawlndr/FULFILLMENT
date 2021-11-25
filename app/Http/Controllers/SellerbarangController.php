@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Barang;
 use App\Seller;
+use App\FmUser;
 use App\Sellerbarang;
 use App\CategoryModel;
-
+use App\InventoryData;
+use App\Location;
+use App\KirimBrg;
+use App\KirimBrgDtl;
+use DataTables;
+use Auth;
 use DB;
 
 class SellerbarangController extends Controller
 {
     function index(){        
-        $data= CategoryModel::get_data_id_all();        
-        return view('seller_barang.selbrg_add')->with('categories',$data);//yg td diedit
+        $data= CategoryModel::get_data_id_all();  
+        $user_id=Auth::user()->user_id;      
+        return view('seller_barang.selbrg_add')->with('data',$data);//yg td diedit
     }
 
     public function seller_save(Request $request){
@@ -24,7 +31,9 @@ class SellerbarangController extends Controller
         $add->product_name = $request->get('product_name'); 
         $add->product_sku = $request->get('product_sku'); 
         $add->size = $request->get('size'); 
-        $add->product_status = $request->get('product_status'); 
+        $add->product_status = $request->get('product_status');
+        $adduser=Auth::user()->user_id;
+        $add->user_id=($adduser);
         $result = $add->save();
 
         if($result){
@@ -41,16 +50,36 @@ class SellerbarangController extends Controller
      $length = $_POST['length'];
      $start = $_POST['start'];
      $search = $_POST['search']['value'];
+     $user_id = Auth::user()->user_id;     
     $join = "(SELECT category_name FROM fm_category WHERE category_id = fm_product.category_id) as category_name";
-    if($search){   
+
+     if($search){  
+        $filters = [];
+        if(!empty($_POST['status'])){
+            $filters[] = "fm_product.product_status ='".$_POST['status']."'";            
+                   
+           }
+           if(!empty($_POST['ukuran'])){
+            $filters[] = "fm_product.size ='".$_POST['ukuran']."'";            
+           }
+           $filters = (count($filters)>0) ? implode(" AND ",$filters)." AND ":"";
     
-    
-     $query = "product_name LIKE '%$search%'  OR product_sku LIKE '%$search%'  OR size LIKE '%$search%'  OR product_status LIKE '%$search%'";
+    $query = "$filters user_id=$user_id AND ((SELECT product_name LIKE '%$search%'  OR product_sku LIKE '%$search%')";
      $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_product WHERE $query )jumdata, $join FROM fm_product WHERE $query LIMIT $start,$length ");
 
-    }else{
 
-     $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_product)jumdata, $join FROM fm_product LIMIT $start,$length ");
+    }else{
+        $filters = [];
+        if(!empty($_POST['status'])){
+            $filters[] = "fm_product.product_status ='".$_POST['status']."'";                     
+           }
+           if(!empty($_POST['ukuran'])){
+            $filters[] = "fm_product.size ='".$_POST['ukuran']."'";            
+           }
+           $filters = (count($filters)>0) ? " WHERE ".implode(" AND ",$filters):"";
+    
+
+     $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_product)jumdata, $join FROM fm_product $filters WHERE user_id=$user_id LIMIT $start,$length ");
      }
     //count total data
 
@@ -61,14 +90,59 @@ class SellerbarangController extends Controller
 
     }
 
+    //Detail Barang
+    public function upload_datatable(){
+        $data=[];
+        $length = $_POST['length'];
+        $start = $_POST['start'];
+        $search = $_POST['search']['value'];   
+       $join = "(SELECT category_name FROM fm_category WHERE category_id = fm_product.category_id) as category_name";
+   
+        if($search){  
+           $filters = [];
+           if(!empty($_POST['status'])){
+               $filters[] = "fm_product.product_status ='".$_POST['status']."'";            
+                      
+              }
+              if(!empty($_POST['ukuran'])){
+               $filters[] = "fm_product.size ='".$_POST['ukuran']."'";            
+              }
+              $filters = (count($filters)>0) ? implode(" AND ",$filters)." AND ":"";
+       
+       $query = "$filters user_id=$user_id AND ((SELECT product_name LIKE '%$search%'  OR product_sku LIKE '%$search%')";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_product WHERE $query )jumdata, $join FROM fm_product WHERE $query LIMIT $start,$length ");
+   
+   
+       }else{
+           $filters = [];
+           if(!empty($_POST['status'])){
+               $filters[] = "fm_product.product_status ='".$_POST['status']."'";                     
+              }
+              if(!empty($_POST['ukuran'])){
+               $filters[] = "fm_product.size ='".$_POST['ukuran']."'";            
+              }
+              $filters = (count($filters)>0) ? " WHERE ".implode(" AND ",$filters):"";
+       
+   
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_product)jumdata, $join FROM fm_product $filters WHERE user_id=$user_id LIMIT $start,$length ");
+        }
+       //count total data
+   
+          $data['recordsTotal']=$data['recordsFiltered']=@$data['data'][0]->jumdata ? :0;
+   
+   
+          return $data;
+   
+       }
+
     public function seller_show(){
 
         $data = Sellerbarang::get_data_id_all();
         return view('seller_barang.selbrg_show')->with('data',$data);
     }
-    public function seldetail_show(){
+    public function seldetail_show($product_id){
 
-        $data = Sellerbarang::get_detail_id();
+        $data = $product_id;
         return view('seller_barang.selbrg_detail')->with('data',$data);
     }
     public function upload_show(){
@@ -79,16 +153,20 @@ class SellerbarangController extends Controller
 
     public function selbrg_edit($product_id){
         $data['barang'] = Sellerbarang::seller_get_by_id($product_id)[0];
-        $data['sellers'] = Seller::get_data_id($data['barang']->seller_id)[0]; 
-        $data['categories'] = CategoryModel::get_data_id_all();    
+        $data['categories'] = CategoryModel::category_get_by_id($data['barang']->category_id)[0];  
+        $user_id=Auth::user()->user_id;       
         return view('seller_barang.selbrg_edit')->with('data',$data);
     }
 
-    public function detail_selbrg($product_id){
-        $data['barang'] = Sellerbarang::detail_get_by_id($product_id)[0];
-        $data['seller'] = Seller::get_data_id($data['barang']->seller_id)[0];  //yg td diedit
-        $data['category'] = CategoryModel::category_get_by_id($data['barang']->category_id)[0];    //yg td diedit  
-        return view('seller_barang.selbrg_detail')->with('data',$data);
+    public function selbrgdetail($product_id){
+
+    $data['barang'] = Barang::detail_get_by_id($product_id)[0];
+    $data['user'] = FmUser::user_get_by_id($data['barang']->user_id)[0];  //yg td diedit
+    $data['category'] = CategoryModel::category_get_by_id($data['barang']->category_id)[0]; 
+    $data['dtl'] = KirimBrgDtl::detail_get_by_product_id($product_id);
+    $data['d'] = $data['barang']->product_id; //yg td diedit   
+    $user_id=Auth::user()->user_id;       
+    return view('seller_barang.selbrg_detail')->with('data',$data);
     }
 
      public function seller_update(Request $request){
@@ -98,6 +176,8 @@ class SellerbarangController extends Controller
         $add->product_sku = $request->get('product_sku'); 
         $add->size = $request->get('size'); 
         $add->product_status = $request->get('product_status');
+        $adduser=Auth::user()->user_id;
+        $add->user_id=($adduser);
         $result = $add->save();
 
          if($result){
@@ -114,17 +194,30 @@ class SellerbarangController extends Controller
         $length = $_POST['length'];
         $start = $_POST['start'];
         $search = $_POST['search']['value'];
-       $join = "(SELECT uid FROM inventory_data WHERE inventory_id = fm_product.inventory_id ) as uid,";
-       $join .= "(SELECT location_name FROM warehouse_location WHERE location_id = fm_product.location_id) as location_name";
-       if($search){   
+        $product_id =$_POST['product_id'];
+        $user_id = Auth::user()->user_id;  
+      
+     if($search){  
+        $filters = "";
+        if(!empty($_POST['status'])){
+
+            $filters = "fm_kirim_barang_detail.status ='".$_POST['status']."' && ";
+            
+           }    
        
-       
-        $query = "seller_id LIKE '%$search%' OR product_name LIKE '%$search%'  OR product_sku LIKE '%$search%'  OR size LIKE '%$search%'  OR product_status LIKE '%$search%'";
-        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_product WHERE $query )jumdata, $join FROM fm_product WHERE $query LIMIT $start,$length ");
+        $query = "$filters ( product_id ='$product_id' and (UID LIKE '%$search%' OR product_name LIKE '%$search%'  OR product_model LIKE '%$search%'   OR position LIKE '%$search%' OR status LIKE '%$search%'))";
+        $data['data'] = DB::SELECT("SELECT *,(select count(*) from fm_kirim_barang_detail WHERE $query )jumdata FROM fm_kirim_barang_detail WHERE $query LIMIT $start,$length ");
    
        }else{
+        $filters = " WHERE product_id = '$product_id' ";
+
+        if(!empty($_POST['status'])){
+
+            $filters .= "AND fm_kirim_barang_detail.status ='".$_POST['status']."'";
+            
+           }
    
-        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_product)jumdata, $join FROM fm_product LIMIT $start,$length ");
+        $data['data']= DB::SELECT("SELECT *,(select count(*) from fm_kirim_barang_detail)jumdata FROM fm_kirim_barang_detail $filters   LIMIT $start,$length ");
         }
        //count total data
    

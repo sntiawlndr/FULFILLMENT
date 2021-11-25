@@ -19,16 +19,20 @@
 
                                             <label for="hEmail" class="col-xl-5 col-sm-3 col-sm-2 col-form-label">Password Baru</label>
                                             <div class="col-xl-11 col-lg-9 col-sm-10">
-                                                <input type="password" class="form-control" id="product_name" placeholder="" name="product_name">
-                                                @csrf
+                                            <input type="text" class="form-control" id="seller_password" placeholder="" name="seller_password" >
+
+                                            <input type="hidden" class="form-control" id="seller_id" placeholder=""  value="{{$seller->seller_id}}">
+                                            @csrf
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
                                             <label for="hPassword" class="col-xl-5 col-sm-3 col-sm-2 col-form-label">Ulang Password Baru</label>
                                             <div class="col-xl-11 col-lg-9 col-sm-10">
-                                                 <input type="text" class="form-control" id="product_name" placeholder="" name="product_name">
-                                            </div>
+                                            <input type="text" class="form-control" id="seller_password1" placeholder="" name="seller_password1">
+                                            <div id="divCheckPassword"></div>    
                                         </div>
+                                        </div>
+                                        
                                        
                                         <div class="form-group row">
                                             <div class="col-sm-10">
@@ -47,19 +51,26 @@
         tags: true,
     });
 
+
     $("#saveButton").click(function(){
+    var password = $("#seller_password").val();
+    var confirmPassword = $("#seller_password1").val();
+
+    if (password != confirmPassword) {
+        $("#divCheckPassword").html("Passwords do not match!");
+    
+    return false ;
+    }
    
     formData = {
-        'seller_email':$("#seller_email").val(),
-        'seller_telpon':$("#seller_telpon").val(),
-        'seller_name':$("#seller_name").val(),
-        'seller_status':$("#seller_status").val(),
+        'seller_id':$("#seller_id").val(),
+        'seller_password':$("#seller_password").val(),
         '_token':$("input[name='_token']").val()
     }
 
   
-     $.ajax({
-                url:"{{url('/seller/save')}}",
+    $.ajax({
+                url:"{{url('/seller/updatepw')}}",
                 method: 'POST',
                 data: formData,
                 cache: false,

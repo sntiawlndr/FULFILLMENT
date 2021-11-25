@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CategoryModel;
 use App\ParentModel;
+
 use DB;
+use DataTables;
+use Redirect,Response;
+
 
 class CategoryController extends Controller
 {
@@ -105,6 +109,32 @@ class CategoryController extends Controller
  return json_encode(array('msg'=>'Sava Data Success', 'content'=>$data, 'success'=>TRUE));
 
 }
+
+public function fildown(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = CategoryModel::select('*');
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    
+                    ->filter(function ($instance) use ($request) {
+                        if ($request->get('category_status') == 'disable' || $request->get('category_status') == 'enbale') {
+                            $instance->where('category_status', $request->get('category_status'));
+                        }
+                        if (!empty($request->get('search'))) {
+                             $instance->where(function($w) use($request){
+                                $search = $request->get('search');
+                                $w->orWhere('category_name', 'LIKE', "%$search%")
+                                ->orWhere('category_status', 'LIKE', "%$search%");
+                            });
+                        }
+                    })
+                    ->rawColumns(['category_status'])
+                    ->make(true);
+        }
+        
+        return view('category.category_show');
+    }
 
 
 }
