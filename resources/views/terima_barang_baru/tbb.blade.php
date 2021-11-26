@@ -182,8 +182,6 @@ if(e.keyCode==13)
 
 
      $("#saveButton").click(function () {
-        
-
         $.ajax({
             url: "{{url('/tbb/save')}}",
             method: 'POST',
@@ -192,9 +190,28 @@ if(e.keyCode==13)
                 response = JSON.parse(response);
                 if (response.success == true) {
                     // location.reload();
+                    let summary = '';
+                    let keys = Object.keys(response.content);
+                    for (let i = 0; i < keys.length; i++){
+                        summary += `<tr>
+                                      <td>
+                                        ${keys[i]}
+                                      </td>
+                                      <td>
+                                        ${response.content[keys[i]]}
+                                      </td>
+                                    </tr>`;
+                    }
+                    $("#first").append(summary);
+
                     alert('Simpan Data Berhasil');
+
+                    $('#home').removeClass('active');
+                    $('#home-tab').removeClass('active');
+                    $('#contact').addClass('active show');
+                    $('#contact-tab').addClass('active');
                 } else {
-                    alert("Gagal Menyimpan Data");
+                    alert(response.msg);
                 }
             },
             error: function (error) {

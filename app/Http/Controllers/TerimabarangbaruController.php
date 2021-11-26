@@ -17,41 +17,37 @@ use DB;
 class TerimabarangbaruController extends Controller
 {
     
-  public function tbb_save(Request $request){
+    public function tbb_save(Request $request){
+        $maxAmount = KirimBrg::where('order_id', $request->order_id)->first()->amount;
+        $amountData = $request->uid ? count($request->uid) : 0;
+        if($amountData!=$maxAmount){
+            return json_encode(array('msg'=>'Gagal Menyimpan Data atau barang tidak sesuai jumlah amount!', 'content'=>[], 'success'=>FALSE));
+        }else{
+            foreach ($request->uid as $index => $item) {
+                $add = New Terimabarangbaru;
+                $add->order_id= $request->order_id;
+                $add->uid= $item;
+                $add->product_name= $request->product_name[$index];
+                $result = $add->save();
+            }
+            $barangs = Terimabarangbaru::where('order_id',$request->order_id)->get();
+            $summary = [];
+            foreach ($barangs as $item) {
+                if (array_key_exists($item->product_name, $summary)){
+                    $summary = [
+                        $item->product_name => $summary[$item->product_name] + 1
+                    ];
+                }else{
+                    $summary += [
+                        $item->product_name => 1
+                    ];
+                }
+            }
 
-   
-
-//     if($result){
-//          return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$result, 'success'=>TRUE));
-//     }else{
-//          return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>$result, 'success'=>FALSE));
-//     } 
-    $maxAmount = KirimBrg::where('order_id', $request->order_id)->first()->amount;
-    $amountData = count($request->uid);
-    // dd($amountData,$maxAmount);
-    if($amountData!=$maxAmount){
-      
-      return json_encode(array('msg'=>'Gagal Menyimpan Data', 'content'=>[], 'success'=>FALSE));
-    }else{
-    foreach ($request->uid as $index => $item) {
-    $add = New Terimabarangbaru;
-    $add->order_id= $request->order_id;
-    $add->uid= $item;
-    $add->product_name= $request->product_name[$index];
-    $result = $add->save();
+            return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>$summary, 'success'=>TRUE));
+        }
 
     }
-    $barangs = Terimabarangbaru::where('order_id',$request->order_id)->get();
-    foreach ($barangs as $item) {
-    $summary=[
-    
-    ]
-
-    }
-      return json_encode(array('msg'=>'Simpan Data Berhasil', 'content'=>[], 'success'=>TRUE));
-    } 
-
-}
     public function baru_datatable(){
 
         $data=[];
